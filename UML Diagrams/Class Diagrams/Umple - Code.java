@@ -1,55 +1,67 @@
 class User
 {
-  string userName;
-  string passWord;
-  int acctRank;
-  public void createAcct(){
-    
-  }
+  name;
+
+int age;
+email;
+telephone;
+username;
+password;
+type;
+public void createAccount(){
+
+}
+ 
 }
 
 class Admin
 {
-  isA User;
-  public void createClass(){
-    
-  }
-  public void editClass(){
-    
-  }
-  public void removeClass(){
-    
-  }
-  public void deleteAcct(){
-    
-  }
+    isA User;
+Class[] manageClasses;
+  
+    1 -- * Instructor;
+  1 -- * Class;
+public boolean deleteClass(){
+
+}
+  
+  
 }
 
-class Instructors
+class Class
 {
-  isA User;
-  public void instructClass(){
-    
-  }
-  public void editClass(){
-    
-  }
-  public void cancelClass(){
-    
-  }
+  name;
+  description;
+  type;
+  Date[] dayOfWeek;
+  Date[] time;
+  difficulty;
+  int capacity;
+  Instructor[] allInstructors;
+  GymMember[] allMembers;
+  boolean status;
+* -- 1..* Instructor;
+  * -- 5..* GymMember;
 }
 
-class Members
+class Instructor
 {
-  isA User;
-  public void viewClass(){
-    
-  }
-  public void searchClass(){
-    
-  }
-  public void enrollClass(){
-    
-  }
+    Class[] teachClasses;
+isA User;
+public boolean createClass(){
+
+}
+}
+
+class GymMember
+{
+    isA User;
+Class[] enrollClasses;
+
+* -- * Instructor;
+public boolean enrollClass(Class arg0){
+
+}
+
 }
 
