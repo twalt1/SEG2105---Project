@@ -30,7 +30,7 @@
             android:src="@drawable/back" />
 
         <TextView
-            android:id="@+id/register"
+            android:id="@+id/register_m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
@@ -58,7 +58,7 @@
                 app:startIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/enterEmail_R"
+                    android:id="@+id/enterEmail_r"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif-black"
@@ -79,7 +79,7 @@
                 app:startIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/enterPassword_l"
+                    android:id="@+id/enterPassword_r"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif-black"
@@ -100,11 +100,11 @@
                 app:startIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/enterUsername_l"
+                    android:id="@+id/enterUsername_r"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif-black"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:textColor="@color/black"
                     tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
@@ -121,11 +121,11 @@
                 app:startIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/enterAge"
+                    android:id="@+id/enterAge_r"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif-black"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:textColor="@color/black"
                     tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
@@ -142,17 +142,18 @@
                 app:startIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/enterPhoneNum"
+                    android:id="@+id/enterPhoneNum_r"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif-black"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:textColor="@color/black"
                     tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <CheckBox
+                android:id="@+id/check"
                 style="@style/Widget.AppCompat.CompoundButton.CheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
