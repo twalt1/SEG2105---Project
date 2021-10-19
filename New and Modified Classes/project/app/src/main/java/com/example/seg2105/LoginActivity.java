@@ -69,7 +69,7 @@ public class LoginActivity extends MainActivity{
                         Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-                        
+                        //start new welcome page
 
                     }
 
