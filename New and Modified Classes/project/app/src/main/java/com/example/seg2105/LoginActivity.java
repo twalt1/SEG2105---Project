@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -12,9 +13,14 @@ import org.w3c.dom.Text;
 
 public class LoginActivity extends MainActivity{
 
+    //back button
     ImageButton btn1;
+    //button 2 is the create account button
+    //button 3 is the login button
     Button btn2, btn3;
     TextInputEditText input1, input2;
+
+    DBHelper database = new DBHelper(LoginActivity.this);
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,6 +50,35 @@ public class LoginActivity extends MainActivity{
 
                 Intent i=new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(i);
+
+            }
+
+        });
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View view) {
+                database = new DBHelper(LoginActivity.this);
+
+                try{
+                    String enteredUsername = input1.getText().toString();
+                    String enteredPassword = input2.getText().toString();
+                    Boolean status = database.checkusernamepassword(enteredUsername, enteredPassword );
+                    if (!status){
+                        Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
+                        
+
+                    }
+
+                }
+                catch(Exception e){
+                    Toast.makeText(LoginActivity.this, "ERROR: " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+
+
 
             }
 

@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn1, btn2;
 
+    DBHelper database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btn1 = findViewById(R.id.login);
+
+        //insert admin in the beginning
+        database = new DBHelper(MainActivity.this);
+        database.insertAdmin();
+
+
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
