@@ -37,6 +37,24 @@
 
         </activity>
 
+        <activity
+
+            android:name=".DeleteUserActivity">
+
+        </activity>
+
+        <activity
+
+            android:name=".ClassActivity">
+
+        </activity>
+
+        <activity
+
+            android:name=".AdminActivity">
+
+        </activity>
+
     </application>
 
 </manifest>
