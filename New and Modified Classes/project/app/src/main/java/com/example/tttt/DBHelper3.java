@@ -21,6 +21,7 @@ public class DBHelper3 extends SQLiteOpenHelper {
     public static final String COL_5 = "Date";
     public static final String COL_6 = "Time";
     //public static final String COL_7 = "Status";
+    Class newclass;
 
     public DBHelper3(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -42,7 +43,7 @@ public class DBHelper3 extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertData(String title, String description, String difficulty, String capacity, String date, String time) {
+    public boolean insertData(String title, String description, String difficulty, Integer capacity, String date, String time) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -52,6 +53,8 @@ public class DBHelper3 extends SQLiteOpenHelper {
         contentValues.put(COL_4, capacity);
         contentValues.put(COL_5, date);
         contentValues.put(COL_6, time);
+
+        newclass = new Class(title, description, difficulty, capacity, date, time);
 
         long res = db.insert(TABLE_NAME, null, contentValues);
 

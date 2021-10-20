@@ -17,11 +17,13 @@
     <string name="enter_username">Enter Username</string>
     <string name="delete_user">Delete a User</string>
     <string name="edit_cla">Edit a Class</string>
+    <string name="add_cla">Add a Class</string>
     <string name="viewcus">View All Gym Members</string>
     <string name="viewins">View All Instructions</string>
     <string name="delecus">Delete a Gym Member</string>
     <string name="deleins">Delete a Instruction</string>
     <string name="cusID">Gym Member ID:</string>
     <string name="insID">Instructor ID:</string>
+    <string name="create_class">Create a Class:</string>
 
 </resources>

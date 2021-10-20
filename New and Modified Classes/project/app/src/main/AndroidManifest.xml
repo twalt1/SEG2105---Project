@@ -51,6 +51,12 @@
 
         <activity
 
+            android:name=".CreateActivity">
+
+        </activity>
+
+        <activity
+
             android:name=".AdminActivity">
 
         </activity>

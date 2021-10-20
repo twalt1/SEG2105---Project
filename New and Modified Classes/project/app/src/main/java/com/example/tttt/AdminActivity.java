@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class AdminActivity extends AppCompatActivity {
 
     //UserAccount admin;
-    Button btn1, btn2;
+    Button btn1, btn2, btn3;
     ImageButton btn;
 
     //public void buildAdmin(){
@@ -24,6 +24,7 @@ public class AdminActivity extends AppCompatActivity {
 
         btn1 = findViewById(R.id.deleteUser);
         btn2 = findViewById(R.id.editClass);
+        btn3 = findViewById(R.id.addClass);
         btn = findViewById(R.id.backToMain);
 
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +42,17 @@ public class AdminActivity extends AppCompatActivity {
              public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), ClassActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), CreateActivity.class);
                 startActivity(intent);
 
             }

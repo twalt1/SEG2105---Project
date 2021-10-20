@@ -36,7 +36,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="282dp"
+            android:layout_height="304dp"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif-black"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:textColor="@color/black"
                     tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
@@ -124,6 +124,27 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter the Time (24hrs)"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconTint="@color/black"
+                app:hintTextColor="@color/black"
+                app:startIconTint="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/enterTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-black"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
     </LinearLayout>
@@ -136,23 +157,9 @@
         android:text="Choose a date"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68" />
-
-    <Button
-        android:id="@+id/timeDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Choose a time"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.83"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintVertical_bias="0.74" />
 
     <Button
         android:id="@+id/enterbtn"
@@ -163,6 +170,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.84000003" />
+        app:layout_constraintVertical_bias="0.94" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

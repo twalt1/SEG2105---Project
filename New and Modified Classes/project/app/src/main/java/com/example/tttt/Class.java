@@ -3,8 +3,8 @@ package com.example.tttt;
 import java.util.Date;
 
 public class Class {
-    String name, description, type;
-    Date[] dayOfWeek, time;
+    String title, description, difficulty, date, time;
+    //Date[] dayOfWeek, time;
     int capacity;
 
     /*
@@ -12,13 +12,12 @@ public class Class {
         make a dropdown menu in the class enroll interface (once it is created)
      */
 
-    public Class(String name, String description, String type, int capacity, Date[] dayOfWeek,
-                 Date[] time) {
-        this.name = name;
+    public Class(String title, String description, String difficulty, int capacity, String date, String time) {
+        this.title = title;
         this.description = description;
-        this.type = type;
-        this.dayOfWeek = dayOfWeek.clone();
-        this.time = time.clone();
+        this.difficulty = difficulty;
+        this.date = date;
+        this.time = time;
         this.capacity = capacity;
     }
 }
