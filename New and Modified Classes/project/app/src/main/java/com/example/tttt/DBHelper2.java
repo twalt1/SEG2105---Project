@@ -18,6 +18,7 @@ public class DBHelper2 extends SQLiteOpenHelper {
     public static final String COL_4 = "EMAIL";
     public static final String COL_5 = "AGE";
     public static final String COL_6 = "PHONENUMBER";
+    UserAccount user;
 
 
     public DBHelper2(@Nullable Context context) {
@@ -49,6 +50,8 @@ public class DBHelper2 extends SQLiteOpenHelper {
         contentValues.put(COL_5, age);
         contentValues.put(COL_6, phonenumber);
 
+        user = new UserAccount(username, password, email, age, phonenumber);
+
         long res = db.insert(TABLE_NAME, null, contentValues);
 
         if(res == -1) {
@@ -64,10 +67,16 @@ public class DBHelper2 extends SQLiteOpenHelper {
 
     }
 
+    public UserAccount getUser() {
+
+        return user;
+
+    }
+
     public Boolean checkusername(String username) {
 
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("SELECT * FROM Instructor_table where USERNAME= "+username, null);
+        Cursor cursor = MyDB.rawQuery("SELECT * FROM Instructor_table where USERNAME= " +username, null);
 
         if(cursor.getCount() > 0) {
 
@@ -84,7 +93,7 @@ public class DBHelper2 extends SQLiteOpenHelper {
     public Boolean checkusernamepassword(String username, String password) {
 
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("SELECT * FROM Instructor_table where USERNAME= "+username+ " and PASSWORD= "+password, null);
+        Cursor cursor = MyDB.rawQuery("SELECT * FROM Instructor_table where USERNAME= " +username+ " and PASSWORD= " +password, null);
 
         if(cursor.getCount() > 0) {
 
@@ -97,4 +106,20 @@ public class DBHelper2 extends SQLiteOpenHelper {
         }
 
     }
+
+    public Integer deleteData (String id) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, "ID = ?", new String[] {id});
+
+    }
+
+    public Cursor getAllData() {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select * from Instructor_table", null);
+        return res;
+
+    }
+
 }
