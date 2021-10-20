@@ -60,7 +60,6 @@ public class LoginActivity extends MainActivity{
 
             public void onClick(View view) {
                 database = new DBHelper(LoginActivity.this);
-
                 try{
                     String enteredUsername = input1.getText().toString();
                     String enteredPassword = input2.getText().toString();
@@ -69,7 +68,11 @@ public class LoginActivity extends MainActivity{
                         Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
+                        //store current user
+                        //database.storeCurrentUser(enteredUsername, enteredPassword);
                         //start new welcome page
+                        Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
+                        startActivity(i);
 
                     }
 

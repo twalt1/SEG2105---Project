@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< HEAD
         <entry key="..\:/Users/Ekko/Documents/GitHub/Project/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/Ekko/Documents/GitHub/Project/app/src/main/res/layout/activity_main.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/Ekko/Documents/GitHub/Project/app/src/main/res/layout/activity_register.xml" value="0.33" />
@@ -20,14 +19,12 @@
         <entry key="..\:/Users/qdatp/Documents/SEG2105---Project/New and Modified Classes/project/app/src/main/res/layout/activity_main.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/qdatp/Documents/SEG2105---Project/New and Modified Classes/project/app/src/main/res/layout/activity_register.xml" value="0.20677083333333332" />
         <entry key="..\:/Users/qdatp/Documents/SEG2105---Project/New and Modified Classes/project/app/src/main/res/layout/activity_welcome.xml" value="0.20677083333333332" />
-=======
         <entry key="..\:/Users/Ekko/Documents/GitHub/TTTT/app/src/main/res/drawable/back.xml" value="0.14907407407407408" />
         <entry key="..\:/Users/Ekko/Documents/GitHub/TTTT/app/src/main/res/drawable/circle.xml" value="0.14907407407407408" />
         <entry key="..\:/Users/Ekko/Documents/GitHub/TTTT/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14907407407407408" />
         <entry key="..\:/Users/Ekko/Documents/GitHub/TTTT/app/src/main/res/layout/activity_login.xml" value="0.11956521739130435" />
         <entry key="..\:/Users/Ekko/Documents/GitHub/TTTT/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Ekko/Documents/GitHub/TTTT/app/src/main/res/layout/activity_register.xml" value="0.17603850050658562" />
->>>>>>> a3ccfdc2b212047fb22f0f5b30024918d0b963f3
       </map>
     </option>
   </component>
