@@ -133,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if (insert) {
 
                                 Toast.makeText(RegisterActivity.this, "Registered successfully!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                 startActivity(intent);
 
                             } else {
@@ -167,7 +167,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if (insert) {
 
                                 Toast.makeText(RegisterActivity.this, "Registered successfully!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                 startActivity(intent);
 
                             } else {
