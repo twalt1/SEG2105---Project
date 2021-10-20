@@ -64,8 +64,22 @@ public class LoginActivity extends AppCompatActivity {
                 try{
                     String enteredUsername = input1.getText().toString();
                     String enteredPassword = input2.getText().toString();
+
+                    if (enteredUsername.equals("admin") && (enteredPassword.equals("admin123"))) {
+
+                        String aString = enteredUsername + " Admin";
+
+                        Intent intent = new Intent(getApplicationContext(), Welcome.class);
+                        intent.putExtra("name", aString);
+                        startActivity(intent);
+
+                        return;
+
+                    }
+
                     Boolean flag1 = db1.checkusernamepassword(enteredUsername, enteredPassword);
                     Boolean flag2 = db2.checkusernamepassword(enteredUsername, enteredPassword);
+
                     if (!flag1){
 
                         if (flag2) {
@@ -89,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
                         //start new welcome page
 
-                        String aString = enteredUsername + " Gymmember";
+                        String aString = enteredUsername + " GymMember";
 
                         Intent intent = new Intent(getApplicationContext(), Welcome.class);
                         intent.putExtra("name", aString);
