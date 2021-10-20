@@ -15,6 +15,13 @@
     <string name="whory">Who Are You?</string>
     <string name="r_instructor">Are you an instructor?</string>
     <string name="enter_username">Enter Username</string>
-
+    <string name="delete_user">Delete a User</string>
+    <string name="edit_cla">Edit a Class</string>
+    <string name="viewcus">View All Gym Members</string>
+    <string name="viewins">View All Instructions</string>
+    <string name="delecus">Delete a Gym Member</string>
+    <string name="deleins">Delete a Instruction</string>
+    <string name="cusID">Gym Member ID:</string>
+    <string name="insID">Instructor ID:</string>
 
 </resources>
