@@ -127,9 +127,31 @@ public class RegisterActivity extends AppCompatActivity {
         //INSERT USER INTO DATABASE
         //if instructor checked
         if (checkInput){
+            //create an instructor
+            Instructor newInstructor = new Instructor(usernameInput, passwordInput, emailInput, ageInput, phoneInput);
+
+            //if user already existed
+            if (db2.checkusername(newInstructor.getUserName())){
+                Toast.makeText(RegisterActivity.this, "Error: instructor already exists in database!", Toast.LENGTH_SHORT).show();
+            }
+            //if user does not exist, then add into database
+            else {
+
+            }
 
         } else {
             //if instructor not checked
+            //create a gym member
+            GymMember newGymMember = new GymMember(usernameInput, passwordInput, emailInput, ageInput, phoneInput);
+
+            //if user already existed
+            if (db1.checkusername(newGymMember.getUserName())){
+                Toast.makeText(RegisterActivity.this, "Error: gym member already exists in database!", Toast.LENGTH_SHORT).show();
+            }
+            //if user does not exist, then add into database
+            else {
+
+            }
 
         }
 
