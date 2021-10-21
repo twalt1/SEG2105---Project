@@ -74,7 +74,7 @@ public class DBHelper3 extends SQLiteOpenHelper {
     public Cursor getAllData() {
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from Class_table", null);
+        Cursor res = db.rawQuery("select * from User_table", null);
         return res;
 
     }
