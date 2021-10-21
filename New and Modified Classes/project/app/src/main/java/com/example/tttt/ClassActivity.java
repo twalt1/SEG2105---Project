@@ -1,7 +1,9 @@
 package com.example.tttt;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,10 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ClassActivity extends AppCompatActivity {
 
-    Button viewClasses, deleteClass;
+    Button viewClasses, deleteClass, editClass;
     ImageButton back;
     DBHelper3 db3;
-    EditText getClassId;
+    EditText getClassId, getClassTitle, getClassDescription;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +28,12 @@ public class ClassActivity extends AppCompatActivity {
         viewClasses = findViewById(R.id.classView);
         back = findViewById(R.id.backEdit);
         deleteClass = findViewById(R.id.classDelete);
-        db3 = new DBHelper3(this);
+        editClass = findViewById(R.id.applyChanges);
         getClassId = findViewById(R.id.getClassID);
+        getClassTitle = findViewById(R.id.getClassTitle);
+        getClassDescription = findViewById(R.id.getClassDescr);
+
+        db3 = new DBHelper3(this);
 
 
 
@@ -83,6 +89,38 @@ public class ClassActivity extends AppCompatActivity {
 
                     Toast.makeText(ClassActivity.this,"Data not Updated", Toast.LENGTH_LONG).show();
 
+                }
+
+            }
+        });
+
+        editClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //getClassId, getClassTitle
+            public void onClick(View view) {
+                try{
+                    String classID = getClassId.getText().toString();
+                    String classDescription = getClassDescription.getText().toString();
+                    String classTitle = getClassTitle.getText().toString();
+                    if (classTitle.isEmpty() && classDescription.isEmpty()){
+                        Toast.makeText(ClassActivity.this,"Both update fields cannot be empty", Toast.LENGTH_LONG).show();
+                    }
+                    else if(classID.isEmpty()){
+                        Toast.makeText(ClassActivity.this,"Must input a class ID to update", Toast.LENGTH_LONG).show();
+                    }
+                    else if(!classDescription.isEmpty() && !classTitle.isEmpty()){
+                        db3.updateName(classID, classTitle);
+                        db3.updateDescription(classID, classDescription);
+                    }
+                    else if(!classDescription.isEmpty()){
+                        db3.updateDescription(classID, classDescription);
+                    }
+                    else{
+                        db3.updateName(classID, classTitle);
+                    }
+                }
+                catch(Exception e){
+                    Toast.makeText(ClassActivity.this,"Exception occurred", Toast.LENGTH_LONG).show();
                 }
 
             }
