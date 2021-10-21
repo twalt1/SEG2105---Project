@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class RegisterActivity extends AppCompatActivity {
 
     DBHelper1 db1;
@@ -89,15 +92,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean validatePhone(String phone){
-        //precondition: string phone is not empty
-        char[] p = phone.toCharArray();
-        for (char c : p){
-            if (!isInteger(String.valueOf(c))){
-                return false;
-            }
-        }
-        return true;
+        String phoneRegex = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$";
+        Pattern phonePattern = Pattern.compile(phoneRegex);
+        Matcher matcher = phonePattern.matcher(phone);
+
+        return (matcher.find() && matcher.group().equals(phone));
     }
+
 
     public String getLoginSuccessString(boolean status){
         if (status){
