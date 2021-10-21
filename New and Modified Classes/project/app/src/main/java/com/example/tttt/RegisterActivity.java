@@ -44,8 +44,6 @@ public class RegisterActivity extends AppCompatActivity {
         backButton = findViewById(R.id.back_button_r);
         checkButton = findViewById(R.id.check);
 
-        //AddData();
-
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,9 +53,6 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                 }
 
-                //Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                //startActivity(intent);
-
             }
         });
 
@@ -66,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                //startActivity(intent);
+                startActivity(intent);
 
             }
         });
@@ -76,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                //startActivity(intent);
+                startActivity(intent);
 
             }
         });
@@ -102,6 +97,14 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    public String getLoginSuccessString(boolean status){
+        if (status){
+            return "SUCCESSFULLY CREATED ACCOUNT!";
+        } else {
+            return "FAILED TO CREATE ACCOUNT!";
+        }
     }
 
     public void AddData(){
@@ -167,8 +170,11 @@ public class RegisterActivity extends AppCompatActivity {
                 //if user does not exist, then add into database
                 else {
                     Toast.makeText(RegisterActivity.this, "Creating an instructor account...", Toast.LENGTH_SHORT).show();
-
-
+                    boolean insertResult = db2.insertData(newInstructor);
+                    Toast.makeText(RegisterActivity.this, getLoginSuccessString(insertResult), Toast.LENGTH_SHORT).show();
+                    //Go to login page
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
                 }
 
             }
@@ -187,6 +193,11 @@ public class RegisterActivity extends AppCompatActivity {
                 //if user does not exist, then add into database
                 else {
                     Toast.makeText(RegisterActivity.this, "Creating a gym member account...", Toast.LENGTH_SHORT).show();
+                    boolean insertResult = db1.insertData(newGymMember);
+                    Toast.makeText(RegisterActivity.this, getLoginSuccessString(insertResult), Toast.LENGTH_SHORT).show();
+                    //Go to login page
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
                 }
 
             }
