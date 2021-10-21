@@ -17,45 +17,62 @@ public class RegisterActivity extends AppCompatActivity {
     DBHelper1 db1;
     DBHelper2 db2;
     TextInputEditText username, password, email, age, phonenumber;
-    Button btn, btn1;
-    ImageButton btn2;
-    CheckBox check;
+    Button registerButton, loginButton;
+    ImageButton backButton;
+    CheckBox checkButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        //gym member
         db1 = new DBHelper1(this);
+        //instructor
         db2 = new DBHelper2(this);
         username = findViewById(R.id.enterUsername_r);
         password = findViewById(R.id.enterPassword_r);
         email = findViewById(R.id.enterEmail_r);
         age = findViewById(R.id.enterAge_r);
         phonenumber = findViewById(R.id.enterPhoneNum_r);
-        btn = findViewById(R.id.register_r);
-        btn1 = findViewById(R.id.login_r);
-        btn2 = findViewById(R.id.back_button_r);
-        check = findViewById(R.id.check);
+        registerButton = findViewById(R.id.register_r);
+        loginButton = findViewById(R.id.login_r);
+        backButton = findViewById(R.id.back_button_r);
+        checkButton = findViewById(R.id.check);
 
-        AddData();
+        //AddData();
 
-        btn1.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    AddData();
+                } catch (Exception e){
+                    Toast.makeText(RegisterActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                }
 
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                //startActivity(intent);
 
             }
         });
 
-        btn2.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                //startActivity(intent);
+
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                //startActivity(intent);
 
             }
         });
@@ -63,25 +80,67 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public boolean isInteger(String s) {
-
         try {
-
             Integer.parseInt(s);
-
         }   catch (NumberFormatException e) {
-
             return false;
-
-        }   catch (NullPointerException e) {
-
-            return false;
-
         }
 
         return true;
-
     }
 
+    public void AddData(){
+        String usernameInput = username.getText().toString();
+        String passwordInput = password.getText().toString();
+        String emailInput = email.getText().toString();
+        String ageInput = age.getText().toString();
+        String phoneInput = phonenumber.getText().toString();
+        boolean checkInput = checkButton.isChecked();
+
+        boolean allValidInput = false;
+
+        //INPUT VALIDATION
+        //if empty string
+        if (usernameInput.isEmpty() || passwordInput.isEmpty() || emailInput.isEmpty() || ageInput.isEmpty() || phoneInput.isEmpty()) {
+            Toast.makeText(RegisterActivity.this, "Error: please fill out all fields", Toast.LENGTH_SHORT).show();
+        }
+        // if age is not an integer
+        else if (!isInteger(ageInput)){
+            Toast.makeText(RegisterActivity.this, "Error: age has to be an integer", Toast.LENGTH_SHORT).show();
+
+        }
+        else {
+            allValidInput = true;
+        }
+
+        //we will print out message to make sure we got the right input
+        String enteredPrint = "username = " + usernameInput;
+        enteredPrint += "\npassword = " + passwordInput;
+        enteredPrint += "\nemail = " + emailInput;
+        enteredPrint += "\nage = " + ageInput;
+        enteredPrint += "\nphone = " + phoneInput;
+        enteredPrint += "\ncheckbox = " + checkInput;
+        enteredPrint += "\nallValidInput = " + allValidInput;
+        Toast.makeText(RegisterActivity.this, enteredPrint, Toast.LENGTH_SHORT).show();
+
+
+        //INSERT USER INTO DATABASE
+        //if instructor checked
+        if (checkInput){
+
+        } else {
+            //if instructor not checked
+
+        }
+
+
+
+
+
+
+
+    }
+    /*
     public void AddData() {
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +193,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 Toast.makeText(RegisterActivity.this, "Registered successfully!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                startActivity(intent);
+                               // startActivity(intent);
 
                             } else {
 
@@ -168,7 +227,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 Toast.makeText(RegisterActivity.this, "Registered successfully!", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                                startActivity(intent);
+                                //startActivity(intent);
 
                             } else {
 
@@ -191,4 +250,5 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     }
+    */
 }
