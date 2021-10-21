@@ -21,6 +21,10 @@ public class RegisterActivity extends AppCompatActivity {
     ImageButton backButton;
     CheckBox checkButton;
 
+    //cannot be older than max age
+    public static final int MAX_AGE = 130;
+    public static final int MIN_AGE = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +93,17 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean validatePhone(String phone){
+        //precondition: string phone is not empty
+        char[] p = phone.toCharArray();
+        for (char c : p){
+            if (!isInteger(String.valueOf(c))){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void AddData(){
         String usernameInput = username.getText().toString();
         String passwordInput = password.getText().toString();
@@ -107,71 +122,78 @@ public class RegisterActivity extends AppCompatActivity {
         // if age is not an integer
         else if (!isInteger(ageInput)){
             Toast.makeText(RegisterActivity.this, "Error: age has to be an integer.", Toast.LENGTH_SHORT).show();
-
+        }
+        // if age is not valid (between min age and max age)
+        else if (Integer.parseInt(ageInput) <= MIN_AGE || Integer.parseInt(ageInput) >= MAX_AGE){
+            Toast.makeText(RegisterActivity.this, "Error: age has to be between " + MIN_AGE + " and " + MAX_AGE, Toast.LENGTH_SHORT).show();
         }
         // if email not valid (no @ or period)
         else if(!emailInput.contains("@") || !emailInput.contains(".")) {
             Toast.makeText(RegisterActivity.this, "Error: email is invalid.", Toast.LENGTH_SHORT).show();
+        }
+        // if phone number not valid
+        else if(!validatePhone(phoneInput)){
+            Toast.makeText(RegisterActivity.this, "Error: phone number must contain only integers", Toast.LENGTH_SHORT).show();
         }
         else {
             allValidInput = true;
         }
 
         //we will print out message to make sure we got the right input
-        String enteredPrint = "username = " + usernameInput;
+        String enteredPrint = "You entered: ";
+        enteredPrint += "\nusername = " + usernameInput;
         enteredPrint += "\npassword = " + passwordInput;
         enteredPrint += "\nemail = " + emailInput;
         enteredPrint += "\nage = " + ageInput;
         enteredPrint += "\nphone = " + phoneInput;
         enteredPrint += "\ncheckbox = " + checkInput;
         enteredPrint += "\nallValidInput = " + allValidInput;
-        Toast.makeText(RegisterActivity.this, enteredPrint, Toast.LENGTH_SHORT).show();
 
 
-        //INSERT USER INTO DATABASE
-        //if instructor checked
-        if (checkInput){
-            //create an instructor
-            Instructor newInstructor = new Instructor(usernameInput, passwordInput, emailInput, ageInput, phoneInput);
+        //if input is valid, then insert into database.
+        if (allValidInput){
+            Toast.makeText(RegisterActivity.this, enteredPrint, Toast.LENGTH_SHORT).show();
 
-            //if user already existed
-            if (db2.checkusername(newInstructor.getUserName())){
-                Toast.makeText(RegisterActivity.this, "Error: instructor already exists in database!", Toast.LENGTH_SHORT).show();
+            //if instructor checked
+            if (checkInput){
+                //create an instructor
+                Instructor newInstructor = new Instructor(usernameInput, passwordInput, emailInput, ageInput, phoneInput);
+
+                //if user already existed
+                if (db2.checkusername(newInstructor.getUserName())){
+                    Toast.makeText(RegisterActivity.this, "Error: instructor already exists in database!", Toast.LENGTH_SHORT).show();
+                }
+
+                //if user does not exist, then add into database
+                else {
+                    Toast.makeText(RegisterActivity.this, "Creating an instructor account...", Toast.LENGTH_SHORT).show();
+
+
+                }
+
             }
 
-            //if user does not exist, then add into database
+
+            //if instructor button not checked
             else {
-                Toast.makeText(RegisterActivity.this, "Creating an instructor account...", Toast.LENGTH_SHORT).show();
+                //create a gym member
+                GymMember newGymMember = new GymMember(usernameInput, passwordInput, emailInput, ageInput, phoneInput);
 
+                //if user already existed
+                if (db1.checkusername(newGymMember.getUserName())){
+                    Toast.makeText(RegisterActivity.this, "Error: gym member already exists in database!", Toast.LENGTH_SHORT).show();
+                }
+
+                //if user does not exist, then add into database
+                else {
+                    Toast.makeText(RegisterActivity.this, "Creating a gym member account...", Toast.LENGTH_SHORT).show();
+                }
 
             }
+
+
 
         }
-
-
-        //if instructor button not checked
-        else {
-            //create a gym member
-            GymMember newGymMember = new GymMember(usernameInput, passwordInput, emailInput, ageInput, phoneInput);
-
-            //if user already existed
-            if (db1.checkusername(newGymMember.getUserName())){
-                Toast.makeText(RegisterActivity.this, "Error: gym member already exists in database!", Toast.LENGTH_SHORT).show();
-            }
-
-            //if user does not exist, then add into database
-            else {
-                Toast.makeText(RegisterActivity.this, "Creating a gym member account...", Toast.LENGTH_SHORT).show();
-
-
-            }
-
-        }
-
-
-
-
-
 
 
     }

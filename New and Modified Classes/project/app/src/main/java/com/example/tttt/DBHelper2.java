@@ -40,31 +40,17 @@ public class DBHelper2 extends SQLiteOpenHelper {
 
     }
 
-    public boolean insertData(String username, String password, String email, String age, String phonenumber) {
+    public boolean insertData(Instructor instructor) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, username);
-        contentValues.put(COL_3, password);
-        contentValues.put(COL_4, email);
-        contentValues.put(COL_5, age);
-        contentValues.put(COL_6, phonenumber);
-
-        user = new UserAccount(username, password, email, age, phonenumber);
-
-        long res = db.insert(TABLE_NAME, null, contentValues);
-
-        if(res == -1) {
-
-            return false;
-
-        }   else {
-
-            return true;
-
-        }
-
-
+        contentValues.put(COL_2, instructor.getUserName());
+        contentValues.put(COL_3, instructor.getPassWord());
+        contentValues.put(COL_4, instructor.getEmail());
+        contentValues.put(COL_5, instructor.getAge());
+        contentValues.put(COL_6, instructor.getPhoneNo());
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        return result != -1;
     }
 
     public UserAccount getUser() {
