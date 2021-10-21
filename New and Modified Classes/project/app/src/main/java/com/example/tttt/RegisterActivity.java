@@ -102,12 +102,16 @@ public class RegisterActivity extends AppCompatActivity {
         //INPUT VALIDATION
         //if empty string
         if (usernameInput.isEmpty() || passwordInput.isEmpty() || emailInput.isEmpty() || ageInput.isEmpty() || phoneInput.isEmpty()) {
-            Toast.makeText(RegisterActivity.this, "Error: please fill out all fields", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Error: please fill out all fields.", Toast.LENGTH_SHORT).show();
         }
         // if age is not an integer
         else if (!isInteger(ageInput)){
-            Toast.makeText(RegisterActivity.this, "Error: age has to be an integer", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Error: age has to be an integer.", Toast.LENGTH_SHORT).show();
 
+        }
+        // if email not valid (no @ or period)
+        else if(!emailInput.contains("@") || !emailInput.contains(".")) {
+            Toast.makeText(RegisterActivity.this, "Error: email is invalid.", Toast.LENGTH_SHORT).show();
         }
         else {
             allValidInput = true;
@@ -134,13 +138,19 @@ public class RegisterActivity extends AppCompatActivity {
             if (db2.checkusername(newInstructor.getUserName())){
                 Toast.makeText(RegisterActivity.this, "Error: instructor already exists in database!", Toast.LENGTH_SHORT).show();
             }
+
             //if user does not exist, then add into database
             else {
+                Toast.makeText(RegisterActivity.this, "Creating an instructor account...", Toast.LENGTH_SHORT).show();
+
 
             }
 
-        } else {
-            //if instructor not checked
+        }
+
+
+        //if instructor button not checked
+        else {
             //create a gym member
             GymMember newGymMember = new GymMember(usernameInput, passwordInput, emailInput, ageInput, phoneInput);
 
@@ -148,8 +158,11 @@ public class RegisterActivity extends AppCompatActivity {
             if (db1.checkusername(newGymMember.getUserName())){
                 Toast.makeText(RegisterActivity.this, "Error: gym member already exists in database!", Toast.LENGTH_SHORT).show();
             }
+
             //if user does not exist, then add into database
             else {
+                Toast.makeText(RegisterActivity.this, "Creating a gym member account...", Toast.LENGTH_SHORT).show();
+
 
             }
 
