@@ -8,20 +8,21 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class DBHelper2 extends SQLiteOpenHelper {
+public class DBUser extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "Instructor.db";
-    public static final String TABLE_NAME = "Instructor_table";
+    public static final String DATABASE_NAME = "User.db";
+    public static final String TABLE_NAME = "User_table";
     public static final String COL_1 = "ID";
     public static final String COL_2 = "USERNAME";
     public static final String COL_3 = "PASSWORD";
     public static final String COL_4 = "EMAIL";
     public static final String COL_5 = "AGE";
     public static final String COL_6 = "PHONENUMBER";
+
     UserAccount user;
 
 
-    public DBHelper2(@Nullable Context context) {
+    public DBUser(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -40,15 +41,14 @@ public class DBHelper2 extends SQLiteOpenHelper {
 
     }
 
-    public boolean insertData(Instructor instructor) {
-
+    public boolean insertData(GymMember gymMember) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_2, instructor.getUserName());
-        contentValues.put(COL_3, instructor.getPassWord());
-        contentValues.put(COL_4, instructor.getEmail());
-        contentValues.put(COL_5, instructor.getAge());
-        contentValues.put(COL_6, instructor.getPhoneNo());
+        contentValues.put(COL_2, gymMember.getUserName());
+        contentValues.put(COL_3, gymMember.getPassWord());
+        contentValues.put(COL_4, gymMember.getEmail());
+        contentValues.put(COL_5, gymMember.getAge());
+        contentValues.put(COL_6, gymMember.getPhoneNo());
         long result = db.insert(TABLE_NAME, null, contentValues);
         return result != -1;
     }
@@ -62,7 +62,7 @@ public class DBHelper2 extends SQLiteOpenHelper {
     public Boolean checkusername(String username) {
 
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("SELECT * FROM Instructor_table where USERNAME= '" +username + "'", null);
+        Cursor cursor = MyDB.rawQuery("SELECT * FROM User_table where USERNAME= '" +username + "'", null);
 
         if(cursor.getCount() > 0) {
 
@@ -79,7 +79,7 @@ public class DBHelper2 extends SQLiteOpenHelper {
     public Boolean checkusernamepassword(String username, String password) {
 
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("SELECT * FROM Instructor_table where USERNAME= '" +username+ "' and PASSWORD= '" + password + "'", null);
+        Cursor cursor = MyDB.rawQuery("SELECT * FROM User_table where USERNAME= '" +username+ "' and PASSWORD= '" +password + "'", null);
 
         if(cursor.getCount() > 0) {
 
@@ -102,8 +102,8 @@ public class DBHelper2 extends SQLiteOpenHelper {
 
     public Cursor getAllData() {
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from Instructor_table", null);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from User_table", null);
         return res;
 
     }

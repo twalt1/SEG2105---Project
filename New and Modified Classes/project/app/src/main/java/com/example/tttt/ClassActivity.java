@@ -1,9 +1,7 @@
 package com.example.tttt;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +16,7 @@ public class ClassActivity extends AppCompatActivity {
 
     Button viewClasses, deleteClass, editClass;
     ImageButton back;
-    DBHelper3 db3;
+    DBAdmin db3;
     EditText getClassId, getClassTitle, getClassDescription;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +31,7 @@ public class ClassActivity extends AppCompatActivity {
         getClassTitle = findViewById(R.id.getClassTitle);
         getClassDescription = findViewById(R.id.getClassDescr);
 
-        db3 = new DBHelper3(this);
+        db3 = new DBAdmin(this);
 
 
 

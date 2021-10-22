@@ -1,8 +1,6 @@
 package com.example.tttt;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,15 +16,15 @@ public class LoginActivity extends AppCompatActivity {
     ImageButton btn1;
     Button btn2, btn3;
     TextInputEditText input1, input2;
-    DBHelper1 db1;
-    DBHelper2 db2;
+    DBUser db1;
+    DBInstructor db2;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        db1 = new DBHelper1(this);
-        db2 = new DBHelper2(this);
+        db1 = new DBUser(this);
+        db2 = new DBInstructor(this);
 
         btn1 = findViewById(R.id.back_button_l);
         btn3 = findViewById(R.id.login_l);
@@ -84,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         if (flag2) {
 
-                            Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
 
                             String aString = enteredUsername + " Instructor";
 

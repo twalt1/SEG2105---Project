@@ -17,8 +17,8 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    DBHelper1 db1;
-    DBHelper2 db2;
+    DBUser db1;
+    DBInstructor db2;
     TextInputEditText username, password, email, age, phonenumber;
     Button registerButton, loginButton;
     ImageButton backButton;
@@ -34,9 +34,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         //gym member
-        db1 = new DBHelper1(this);
+        db1 = new DBUser(this);
         //instructor
-        db2 = new DBHelper2(this);
+        db2 = new DBInstructor(this);
         username = findViewById(R.id.enterUsername_r);
         password = findViewById(R.id.enterPassword_r);
         email = findViewById(R.id.enterEmail_r);

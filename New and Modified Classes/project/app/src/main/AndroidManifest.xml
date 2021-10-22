@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".UserWelcome"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -18,49 +21,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-
-            android:name=".RegisterActivity">
-
-        </activity>
-
-        <activity
-
-            android:name=".LoginActivity">
-
-        </activity>
-
-        <activity
-
-            android:name=".Welcome">
-
-        </activity>
-
-        <activity
-
-            android:name=".DeleteUserActivity">
-
-        </activity>
-
-        <activity
-
-            android:name=".ClassActivity">
-
-        </activity>
-
-        <activity
-
-            android:name=".CreateActivity">
-
-        </activity>
-
-        <activity
-
-            android:name=".AdminActivity">
-
-        </activity>
-
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".Welcome"></activity>
+        <activity android:name=".DeleteUserActivity"></activity>
+        <activity android:name=".ClassActivity"></activity>
+        <activity android:name=".CreateActivity"></activity>
+        <activity android:name=".AdminActivity"></activity>
     </application>
 
 </manifest>

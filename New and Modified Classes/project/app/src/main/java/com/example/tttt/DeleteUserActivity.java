@@ -17,8 +17,8 @@ public class DeleteUserActivity extends AppCompatActivity {
     ImageButton btn1;
     Button btn2, btn3, btn4, btn5;
     EditText text1, text2;
-    DBHelper1 db1;
-    DBHelper2 db2;
+    DBUser db1;
+    DBInstructor db2;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +33,8 @@ public class DeleteUserActivity extends AppCompatActivity {
         text1 = findViewById(R.id.getCusID);
         text2 = findViewById(R.id.getInsID);
 
-        db1 = new DBHelper1(this);
-        db2 = new DBHelper2(this);
+        db1 = new DBUser(this);
+        db2 = new DBInstructor(this);
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override

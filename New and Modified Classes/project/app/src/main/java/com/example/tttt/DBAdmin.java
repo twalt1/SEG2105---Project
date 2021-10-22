@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import java.sql.Date;
 import java.sql.Time;
 
-public class DBHelper3 extends SQLiteOpenHelper {
+public class DBAdmin extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Class.db";
     public static final String TABLE_NAME = "User_table";
@@ -23,7 +23,7 @@ public class DBHelper3 extends SQLiteOpenHelper {
     //public static final String COL_7 = "Status";
     Class newclass;
 
-    public DBHelper3(@Nullable Context context) {
+    public DBAdmin(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 

@@ -33,13 +33,13 @@ public class Welcome extends AppCompatActivity {
 
                 if (got[1].equals("GymMember")) {
 
-                    Intent intent = new Intent(getApplicationContext(), ClassActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), UserWelcome.class);
                     startActivity(intent);
                     finish();
 
                 }   else if (got[1].equals("Instructor")) {
 
-                    Intent intent = new Intent(getApplicationContext(), ClassActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), UserWelcome.class);
                     startActivity(intent);
                     finish();
 

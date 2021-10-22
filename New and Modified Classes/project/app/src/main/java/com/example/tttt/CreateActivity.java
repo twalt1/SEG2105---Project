@@ -5,18 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.sql.Time;
 import java.util.Calendar;
 
 public class CreateActivity extends MainActivity implements DatePickerDialog.OnDateSetListener{
-    DBHelper3 db3;
+    DBAdmin db3;
     TextInputEditText title, description, difficulty, capacity, startTime;
     Button btn, btn1;
     ImageButton btn2;
@@ -27,7 +25,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
 
-        db3 = new DBHelper3(this);
+        db3 = new DBAdmin(this);
         title = findViewById(R.id.enterTitle);
         description = findViewById(R.id.enterDesc);
         difficulty = findViewById(R.id.enterDiff);
