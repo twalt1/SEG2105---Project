@@ -1,67 +1,142 @@
-class User
+class UserAccount
 {
-  name;
-
-int age;
+  age;
 email;
 telephone;
 username;
 password;
-type;
 public void createAccount(){
 
 }
- 
+  
 }
 
 class Admin
 {
-    isA User;
-Class[] manageClasses;
-  
-    1 -- * Instructor;
+    isA UserAccount;
+1 -- * Instructor;
   1 -- * Class;
-public boolean deleteClass(){
-
-}
-  
-  
+  1 -- 1 DBAdmin;
 }
 
 class Class
 {
-  name;
   description;
-  type;
-  Date[] dayOfWeek;
-  Date[] time;
   difficulty;
   int capacity;
-  Instructor[] allInstructors;
-  GymMember[] allMembers;
-  boolean status;
+  title;
+date;
+time;
 * -- 1..* Instructor;
   * -- 5..* GymMember;
+  * -- * DBAdmin;
 }
 
 class Instructor
 {
-    Class[] teachClasses;
-isA User;
-public boolean createClass(){
-
-}
+    isA UserAccount;
 }
 
 class GymMember
 {
-    isA User;
-Class[] enrollClasses;
-
+    isA UserAccount;
 * -- * Instructor;
-public boolean enrollClass(Class arg0){
+}class DBAdmin
+{
+  DATABASE_NAME;
+  TABLE_NAME;
+  COL_1;
+  COL_2;
+  COL_3;
+  COL_4;
+  COL_5;
+  COL_6;
+  Class newClass;
+public void insertData(){
 
 }
+public int deleteData(){
 
+}
+public boolean updateName(){
+
+}
+public boolean updateDescription(){
+
+}
+public void onCreate(){
+
+}
+public void onUpgrade(){
+
+}
+}
+
+class DBInstructor
+{
+  DATABASE_NAME;
+  TABLE_NAME;
+  COL_1;
+  COL_2;
+  COL_3;
+  COL_4;
+  COL_5;
+  COL_6;
+  1 -- 1..* Instructor;
+public void onCreate(){
+
+}
+public void onCreate(){
+
+}
+public void onUpgrade(){
+
+}
+public boolean insertData(){
+
+}
+public boolean checkusername(){
+
+}
+public boolean checkusernameandpassword(){
+
+}
+public int deleteData(){
+
+}
+}
+
+class DBUser
+{
+  DATABASE_NAME;
+  TABLE_NAME;
+  COL_1;
+  COL_2;
+  COL_3;
+  COL_4;
+  COL_5;
+  COL_6;
+  * -- 1..* GymMember;
+public void onCreate(){
+
+}
+public void onCreate(){
+
+}
+public void onUpgrade(){
+
+}
+public boolean insertData(){
+
+}
+public boolean checkusername(){
+
+}
+public boolean checkusernameandpassword(){
+
+}
+public int deleteData(){
+
+}
 }
 
