@@ -137,7 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
         // if phone number not valid
         else if(!validatePhone(phoneInput)){
-            Toast.makeText(RegisterActivity.this, "Error: phone number must contain only integers", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Error: phone number must contain only integers and greater than 9 characters", Toast.LENGTH_SHORT).show();
         }
         else {
             allValidInput = true;
