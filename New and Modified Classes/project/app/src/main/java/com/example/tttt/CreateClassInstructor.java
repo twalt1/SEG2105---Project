@@ -13,27 +13,27 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Calendar;
 
-public class CreateActivity extends MainActivity implements DatePickerDialog.OnDateSetListener{
+public class CreateClassInstructor extends MainActivity implements DatePickerDialog.OnDateSetListener{
     DBAdmin db3;
     TextInputEditText title, description, difficulty, capacity, startTime;
     Button btn, btn1;
     ImageButton btn2;
     static String date;
-
+//Note, might need to add an additional column to include the instructor name, or all tag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create);
+        setContentView(R.layout.activity_create_class_instructor);
 
         db3 = new DBAdmin(this);
-        title = findViewById(R.id.enterTitleInstructor);
+        title = findViewById(R.id.insEnterTitleInstructor);
         description = findViewById(R.id.enterDesc);
-        difficulty = findViewById(R.id.enterDiff);
-        capacity = findViewById(R.id.enterCap);
+        difficulty = findViewById(R.id.insEnterDiff);
+        capacity = findViewById(R.id.insEnterCap);
         startTime = findViewById(R.id.insEnterTime);
-        btn = findViewById(R.id.dateDialog);
-        btn1 = findViewById(R.id.enterbtn);
-        btn2 = findViewById(R.id.backbutton);
+        btn = findViewById(R.id.chooseDate);
+        btn1 = findViewById(R.id.confirmChangesBtn);
+        btn2 = findViewById(R.id.backbutton3);
 
         AddData();
 
@@ -41,7 +41,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
+                Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
                 startActivity(intent);
             }
         });
@@ -54,8 +54,8 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
             }
             private void showPickerDialog(){
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        CreateActivity.this,
-                        CreateActivity.this,
+                        CreateClassInstructor.this,
+                        CreateClassInstructor.this,
                         Calendar.getInstance().get(Calendar.YEAR),
                         Calendar.getInstance().get(Calendar.MONTH),
                         Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
@@ -106,7 +106,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
 
                 if (!isInteger(cap)) {
 
-                    Toast.makeText(CreateActivity.this, "Please enter correct number.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateClassInstructor.this, "Please enter correct number.", Toast.LENGTH_SHORT).show();
 
                 }   else {
 
@@ -116,7 +116,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
 
                 if (titl.equals("") || desc.equals("") || diff.equals("") || cap.equals("") || time.equals("") || date.equals("")) {
 
-                    Toast.makeText(CreateActivity.this, "Please enter all the fields.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CreateClassInstructor.this, "Please enter all the fields.", Toast.LENGTH_SHORT).show();
 
                 } else {
 
@@ -124,13 +124,13 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
 
                     if (insert) {
 
-                        Toast.makeText(CreateActivity.this, "Class created!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
+                        Toast.makeText(CreateClassInstructor.this, "Class created!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
                         startActivity(intent);
 
                     } else {
 
-                        Toast.makeText(CreateActivity.this, "Class not created.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateClassInstructor.this, "Class not created.", Toast.LENGTH_SHORT).show();
 
                     }
 

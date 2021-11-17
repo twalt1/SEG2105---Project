@@ -39,7 +39,7 @@ public class Welcome extends AppCompatActivity {
 
                 }   else if (got[1].equals("Instructor")) {
 
-                    Intent intent = new Intent(getApplicationContext(), UserWelcome.class);
+                    Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
                     startActivity(intent);
                     finish();
 

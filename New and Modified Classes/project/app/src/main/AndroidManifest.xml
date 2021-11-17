@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".EditClassInstructor"
+            android:exported="true" />
+        <activity
+            android:name=".CreateClassInstructor"
+            android:exported="true" />
+        <activity
             android:name=".UserWelcome"
             android:exported="true" />
         <activity
@@ -21,13 +27,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".Welcome"></activity>
-        <activity android:name=".DeleteUserActivity"></activity>
-        <activity android:name=".ClassActivity"></activity>
-        <activity android:name=".CreateActivity"></activity>
-        <activity android:name=".AdminActivity"></activity>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".Welcome" />
+        <activity android:name=".DeleteUserActivity" />
+        <activity android:name=".ClassActivity" />
+        <activity android:name=".CreateActivity" />
+        <activity android:name=".AdminActivity" />
+        <activity android:name=".InstructorActivity" />
     </application>
 
 </manifest>
