@@ -29,7 +29,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
         setContentView(R.layout.activity_create);
 
         db3 = new DBAdmin(this);
-        title = findViewById(R.id.enterTitleInstructor);
+        title = findViewById(R.id.insEnterTitleInstructor);
         //drop down list to select type of class
         typeDropDown = (Spinner) findViewById(R.id.classType_id);
         ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(getApplicationContext(),
@@ -46,11 +46,11 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
 
 
         description = findViewById(R.id.enterDesc);
-        capacity = findViewById(R.id.enterCap);
+        capacity = findViewById(R.id.insEnterCap);
         startTime = findViewById(R.id.insEnterTime);
-        btn = findViewById(R.id.dateDialog);
-        btn1 = findViewById(R.id.enterbtn);
-        btn2 = findViewById(R.id.backbutton);
+        btn = findViewById(R.id.chooseDate);
+        btn1 = findViewById(R.id.confirmChangesBtn);
+        btn2 = findViewById(R.id.backbutton3);
 
         AddData();
 
@@ -142,10 +142,12 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
 
                 }
 
+                /*
                 //check if anything is null then report error
                 if (titl == null || type == null || desc == null || diff == null || cap == null || time == null){
                     Toast.makeText(CreateActivity.this, "Encounter null value", Toast.LENGTH_SHORT).show();
                 }
+                */
 
                 if (titl.equals("") || desc.equals("") || diff.equals("") || cap.equals("") || time.equals("") || date.equals("")) {
 
@@ -153,7 +155,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
 
                 } else {
 
-                    Boolean insert = db3.insertData(titl, desc, diff, c2, date, time);
+                    Boolean insert = db3.insertData(titl, type, desc, diff, c2, date, time);
 
                     if (insert) {
 

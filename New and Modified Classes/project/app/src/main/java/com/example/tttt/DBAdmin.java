@@ -43,7 +43,7 @@ public class DBAdmin extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertData(String title, String description, String difficulty, Integer capacity, String date, String time) {
+    public boolean insertData(String title, String type, String description, String difficulty, Integer capacity, String date, String time) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

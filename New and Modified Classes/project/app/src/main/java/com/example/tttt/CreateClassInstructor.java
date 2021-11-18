@@ -4,9 +4,11 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -15,7 +17,8 @@ import java.util.Calendar;
 
 public class CreateClassInstructor extends MainActivity implements DatePickerDialog.OnDateSetListener{
     DBAdmin db3;
-    TextInputEditText title, description, difficulty, capacity, startTime;
+    TextInputEditText title, description, capacity, startTime;
+    Spinner typeDropDown, difficultyDropDown;
     Button btn, btn1;
     ImageButton btn2;
     static String date;
@@ -27,8 +30,22 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
 
         db3 = new DBAdmin(this);
         title = findViewById(R.id.insEnterTitleInstructor);
+
+        //drop down list to select type of class
+        typeDropDown = (Spinner) findViewById(R.id.classType_id);
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.classType));
+        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeDropDown.setAdapter(typeAdapter);
+
+        //drop down list for difficulty
+        difficultyDropDown = (Spinner) findViewById(R.id.classDifficulty_id);
+        ArrayAdapter<String> difficultyAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.difficultyType));
+        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        difficultyDropDown.setAdapter(difficultyAdapter);
+
         description = findViewById(R.id.enterDesc);
-        difficulty = findViewById(R.id.insEnterDiff);
         capacity = findViewById(R.id.insEnterCap);
         startTime = findViewById(R.id.insEnterTime);
         btn = findViewById(R.id.chooseDate);
@@ -97,11 +114,22 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
             public void onClick(View view) {
 
                 String titl = title.getText().toString();
+                String type = typeDropDown.getSelectedItem().toString();
                 String desc = description.getText().toString();
-                String diff = difficulty.getText().toString();
+                String diff = difficultyDropDown.getSelectedItem().toString();
                 String cap = capacity.getText().toString();
                 String time = startTime.getText().toString();
                 Integer c2 = 0;
+
+                //we will print out message to make sure we got the right input
+                String enteredPrint = "You entered: ";
+                enteredPrint += "\ntitle = " + titl;
+                enteredPrint += "\ntype = " + type;
+                enteredPrint += "\ndescription = " + desc;
+                enteredPrint += "\ndifficulty = " + diff;
+                enteredPrint += "\ncapacity = " + cap;
+                enteredPrint += "\ntime = " + time;
+                Toast.makeText(getApplicationContext(), enteredPrint, Toast.LENGTH_SHORT).show();
 
 
                 if (!isInteger(cap)) {
@@ -120,7 +148,7 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
 
                 } else {
 
-                    Boolean insert = db3.insertData(titl, desc, diff, c2, date, time);
+                    Boolean insert = db3.insertData(titl, type, desc, diff, c2, date, time);
 
                     if (insert) {
 

@@ -4,127 +4,152 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fece2f"
-    tools:context=".CreateClassInstructor">
+    android:background="#FECE2F">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="304dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.377">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <ImageButton
+            android:id="@+id/backbutton3"
+            android:layout_width="72dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle"
+            android:contentDescription="@string/back"
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+            android:padding="5dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/create_Class"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Title"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidthFocused="2dp"
-            app:endIconMode="clear_text"
-            app:endIconTint="@color/black"
-            app:hintTextColor="@color/black"
-            app:startIconTint="@color/black">
+            android:layout_marginTop="50dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/create_class"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="44sp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/insEnterTitleInstructor"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="sans-serif-black"
-                android:inputType="text"
-                android:textColor="@color/black"
-                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Description"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidthFocused="2dp"
-            app:endIconTint="@color/black"
-            app:hintTextColor="@color/black"
-            app:startIconTint="@color/black">
+            android:layout_height="376dp"
+            android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/enterDesc"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="sans-serif-black"
-                android:inputType="text"
-                android:textColor="@color/black"
-                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+                android:layout_height="wrap_content"
+                android:hint="Enter Title"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconMode="clear_text"
+                app:endIconTint="@color/black"
+                app:hintTextColor="@color/black"
+                app:startIconTint="@color/black">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/insEnterTitleInstructor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-black"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Difficulty"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidthFocused="2dp"
-            app:endIconTint="@color/black"
-            app:hintTextColor="@color/black"
-            app:startIconTint="@color/black">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/insEnterDiff"
+            <Spinner
+                android:id="@+id/classType_id"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="sans-serif-black"
-                android:inputType="text"
-                android:textColor="@color/black"
-                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+                android:layout_height="wrap_content" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Capacity"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidthFocused="2dp"
-            app:endIconTint="@color/black"
-            app:hintTextColor="@color/black"
-            app:startIconTint="@color/black">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/insEnterCap"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="sans-serif-black"
-                android:inputType="text"
-                android:textColor="@color/black"
-                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+                android:layout_height="wrap_content"
+                android:hint="Enter Description"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconTint="@color/black"
+                app:hintTextColor="@color/black"
+                app:startIconTint="@color/black">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/enterDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-black"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter the Time (24hrs)"
-            app:boxStrokeColor="@color/black"
-            app:boxStrokeWidthFocused="2dp"
-            app:endIconTint="@color/black"
-            app:hintTextColor="@color/black"
-            app:startIconTint="@color/black">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/insEnterTime"
+            <Spinner
+                android:id="@+id/classDifficulty_id"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="sans-serif-black"
-                android:inputType="text"
-                android:textColor="@color/black"
-                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+                android:layout_height="wrap_content" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Capacity"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconTint="@color/black"
+                app:hintTextColor="@color/black"
+                app:startIconTint="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/insEnterCap"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-black"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter the Time (24hrs)"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidthFocused="2dp"
+                app:endIconTint="@color/black"
+                app:hintTextColor="@color/black"
+                app:startIconTint="@color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/insEnterTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-black"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/chooseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="256dp"
+        android:layout_weight="1"
+        android:text="Choose a date"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.74" />
 
     <Button
         android:id="@+id/confirmChangesBtn"
@@ -133,53 +158,8 @@
         android:text="Enter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.938" />
+        app:layout_constraintVertical_bias="0.94" />
 
-    <Button
-        android:id="@+id/chooseDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="572dp"
-        android:layout_weight="1"
-        android:text="Choose a date"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.74" />
-
-    <TextView
-        android:id="@+id/create_Class3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-black"
-        android:text="@string/create_class"
-        android:textAllCaps="true"
-        android:textColor="@color/black"
-        android:textSize="48sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.145" />
-
-    <ImageButton
-        android:id="@+id/backbutton3"
-        android:layout_width="72dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/circle"
-        android:contentDescription="@string/back"
-        android:minWidth="48dp"
-        android:minHeight="48dp"
-        android:padding="5dp"
-        android:src="@drawable/back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

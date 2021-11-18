@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <ImageButton
-            android:id="@+id/backbutton"
+            android:id="@+id/backbutton3"
             android:layout_width="72dp"
             android:layout_height="wrap_content"
             android:background="@drawable/circle"
@@ -51,7 +51,7 @@
                 app:startIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/enterTitleInstructor"
+                    android:id="@+id/insEnterTitleInstructor"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif-black"
@@ -103,7 +103,7 @@
                 app:startIconTint="@color/black">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/enterCap"
+                    android:id="@+id/insEnterCap"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif-black"
@@ -139,7 +139,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/dateDialog"
+        android:id="@+id/chooseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="256dp"
@@ -152,7 +152,7 @@
         app:layout_constraintVertical_bias="0.74" />
 
     <Button
-        android:id="@+id/enterbtn"
+        android:id="@+id/confirmChangesBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enter"
