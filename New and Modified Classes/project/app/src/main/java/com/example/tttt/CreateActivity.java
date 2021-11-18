@@ -16,7 +16,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.Calendar;
 
 public class CreateActivity extends MainActivity implements DatePickerDialog.OnDateSetListener{
-    DBAdmin db3;
+    DBClass db3;
     TextInputEditText title, description, capacity, startTime;
     Spinner typeDropDown, difficultyDropDown;
     Button btn, btn1;
@@ -28,7 +28,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
 
-        db3 = new DBAdmin(this);
+        db3 = new DBClass(this);
         title = findViewById(R.id.insEnterTitleInstructor);
         //drop down list to select type of class
         typeDropDown = (Spinner) findViewById(R.id.classType_id);

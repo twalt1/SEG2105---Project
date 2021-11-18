@@ -16,7 +16,7 @@ public class ClassActivity extends AppCompatActivity {
 
     Button viewClasses, deleteClass, editClass;
     ImageButton back;
-    DBAdmin db3;
+    DBClass db3;
     EditText getClassId, getClassTitle, getClassDescription;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class ClassActivity extends AppCompatActivity {
         getClassTitle = findViewById(R.id.getClassTitle);
         getClassDescription = findViewById(R.id.getClassDescr);
 
-        db3 = new DBAdmin(this);
+        db3 = new DBClass(this);
 
 
 
