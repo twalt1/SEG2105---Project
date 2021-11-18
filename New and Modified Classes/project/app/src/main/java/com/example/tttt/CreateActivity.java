@@ -155,7 +155,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
 
                 } else {
 
-                    Boolean insert = db3.insertData(titl, type, desc, diff, c2, date, time);
+                    Boolean insert = db3.insertData(titl, type, desc, diff, c2, date, time, "admin");
 
                     if (insert) {
 
