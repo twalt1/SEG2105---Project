@@ -36,7 +36,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="304dp"
+            android:layout_height="376dp"
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -61,6 +61,11 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <Spinner
+                android:id="@+id/classType_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,26 +87,10 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <Spinner
+                android:id="@+id/classDifficulty_id"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter Difficulty"
-                app:boxStrokeColor="@color/black"
-                app:boxStrokeWidthFocused="2dp"
-                app:endIconTint="@color/black"
-                app:hintTextColor="@color/black"
-                app:startIconTint="@color/black">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/enterDiff"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="sans-serif-black"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -153,6 +142,7 @@
         android:id="@+id/dateDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="256dp"
         android:layout_weight="1"
         android:text="Choose a date"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
