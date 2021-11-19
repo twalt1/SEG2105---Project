@@ -123,6 +123,8 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
                 String time = startTime.getText().toString();
                 Integer c2 = 0;
 
+                boolean allValidInput = false;
+
                 //we will print out message to make sure we got the right input
                 String enteredPrint = "You entered: ";
                 enteredPrint += "\ntitle = " + titl;
@@ -134,29 +136,32 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
                 Toast.makeText(getApplicationContext(), enteredPrint, Toast.LENGTH_SHORT).show();
 
 
+                //if capacity is not an integer
                 if (!isInteger(cap)) {
-
-                    Toast.makeText(CreateClassInstructor.this, "Please enter correct number.", Toast.LENGTH_SHORT).show();
-
-                }   else {
-
-                    c2 = Integer.parseInt(cap);
-
+                    Toast.makeText(CreateClassInstructor.this, "Please enter an integer for 'capacity'", Toast.LENGTH_SHORT).show();
                 }
 
-                if (titl.equals("") || desc.equals("") || diff.equals("") || cap.equals("") || time.equals("") || date.equals("")) {
-
+                //if capacity is an integer but is smaller than 1
+                else if (isInteger(cap) && Integer.parseInt(cap) < 1){
+                    Toast.makeText(CreateClassInstructor.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
+                }
+                //if one of the inputs is empty
+                else if (titl.equals("") || desc.equals("") || diff.equals("") || cap.equals("") || time.equals("") || date.equals("")) {
                     Toast.makeText(CreateClassInstructor.this, "Please enter all the fields.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //if all the above cases are false, then the inputs are valid
+                    allValidInput = true;
+                }
 
-                } else {
-
+                if (allValidInput) {
                     //We need to get the email of the instructor (who created this class)
                     //When we insert a new class into the database, this class will have the email of the instructor
                     SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
                     String instructorEmail = currentUserSession.getString("email", "");
 
                     //Now we insert (create) a new class in the database
-                    Boolean insert = db3.insertData(titl, type, desc, diff, c2, date, time, instructorEmail);
+                    Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, instructorEmail);
 
                     if (insert) {
 
@@ -169,8 +174,6 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
                         Toast.makeText(CreateClassInstructor.this, "Class not created.", Toast.LENGTH_SHORT).show();
 
                     }
-
-
                 }
 
             }
