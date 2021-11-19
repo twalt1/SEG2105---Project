@@ -110,4 +110,10 @@ public class DBClass extends SQLiteOpenHelper {
         database.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
     }
 
+    public void updateTime(String id, String time){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_6, time);
+        database.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
+    }
 }

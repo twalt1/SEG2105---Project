@@ -22,7 +22,7 @@ public class EditClassInstructor extends AppCompatActivity {
     ImageButton back;
     DBClass db3;
     Spinner typeDropDown, difficultyDropDown;
-    EditText getClassId, getClassTitle, getClassDescription;
+    EditText getClassId, getClassTitle, getClassDescription, getClassTime;
     TextInputEditText capacity, startTime;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,6 @@ public class EditClassInstructor extends AppCompatActivity {
         difficultyDropDown.setAdapter(difficultyAdapter);
 
         capacity = findViewById(R.id.insEnterCap);
-
         viewClasses = findViewById(R.id.instructorView);
         back = findViewById(R.id.backBtn2);
         cancelClasses = findViewById(R.id.cancelClass);
@@ -52,6 +51,7 @@ public class EditClassInstructor extends AppCompatActivity {
         getClassId = findViewById(R.id.insGetClassID);
         getClassTitle = findViewById(R.id.insGetClassTitle);
         getClassDescription = findViewById(R.id.insGetClassDescr);
+        getClassTime = findViewById(R.id.insGetTime);
 
         db3 = new DBClass(this);
 
@@ -126,6 +126,7 @@ public class EditClassInstructor extends AppCompatActivity {
                     String type = typeDropDown.getSelectedItem().toString();
                     String diff = difficultyDropDown.getSelectedItem().toString();
                     String cap = capacity.getText().toString();
+                    String time = getClassTime.getText().toString();
                     String classDescription = getClassDescription.getText().toString();
                     String classTitle = getClassTitle.getText().toString();
                     if (classTitle.isEmpty() && classDescription.isEmpty()){
@@ -145,6 +146,7 @@ public class EditClassInstructor extends AppCompatActivity {
                     else if(!classDescription.isEmpty() && !classTitle.isEmpty()){
                         db3.updateName(classID, classTitle);
                         db3.updateDescription(classID, classDescription);
+                        db3.updateTime(classID, time);
                     }
                     else if(!classDescription.isEmpty()){
                         db3.updateDescription(classID, classDescription);
