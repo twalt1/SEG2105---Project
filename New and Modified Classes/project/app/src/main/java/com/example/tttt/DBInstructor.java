@@ -108,4 +108,31 @@ public class DBInstructor extends SQLiteOpenHelper {
 
     }
 
+
+    public Instructor getInstructorFromUsernameAndPassword(String username_in, String password_in){
+        //return instructor based on username and password
+        Instructor instructor = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "select * from " + TABLE_NAME + " ";
+        query += " where USERNAME = '" + username_in + "' ";
+        query += " and PASSWORD = '" + password_in + "' ";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()){
+            String username = cursor.getString(1);
+            String password = cursor.getString(2);
+            String email = cursor.getString(3);
+            String age = cursor.getString(4);
+            String phoneNumber = cursor.getString(5);
+            instructor = new Instructor(username, password, email, age, phoneNumber);
+        }
+
+        cursor.close();
+        db.close();
+        return instructor;
+    }
+
+
+
 }

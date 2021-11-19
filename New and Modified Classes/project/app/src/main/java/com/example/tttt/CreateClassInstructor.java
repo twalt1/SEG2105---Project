@@ -1,7 +1,9 @@
 package com.example.tttt;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -148,7 +150,13 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
 
                 } else {
 
-                    Boolean insert = db3.insertData(titl, type, desc, diff, c2, date, time, "instructor");
+                    //We need to get the email of the instructor (who created this class)
+                    //When we insert a new class into the database, this class will have the email of the instructor
+                    SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
+                    String instructorEmail = currentUserSession.getString("email", "");
+
+                    //Now we insert (create) a new class in the database
+                    Boolean insert = db3.insertData(titl, type, desc, diff, c2, date, time, instructorEmail);
 
                     if (insert) {
 
