@@ -7,9 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
-import java.sql.Date;
-import java.sql.Time;
-
 public class DBClass extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Class.db";
@@ -104,6 +101,13 @@ public class DBClass extends SQLiteOpenHelper {
         cv.put(COL_2, description);
         database.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
         return true;
+    }
+
+    public void updateCapacity(String id, int capacity){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_4, capacity);
+        database.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
     }
 
 }

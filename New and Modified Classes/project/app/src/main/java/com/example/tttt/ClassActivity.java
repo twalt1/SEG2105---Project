@@ -127,10 +127,17 @@ public class ClassActivity extends AppCompatActivity {
                     String classDescription = getClassDescription.getText().toString();
                     String classTitle = getClassTitle.getText().toString();
                     if (classTitle.isEmpty() && classDescription.isEmpty()){
-                        Toast.makeText(ClassActivity.this,"Both update fields cannot be empty", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ClassActivity.this,"Both title and description fields cannot be empty", Toast.LENGTH_LONG).show();
                     }
                     else if(classID.isEmpty()){
                         Toast.makeText(ClassActivity.this,"Must input a class ID to update", Toast.LENGTH_LONG).show();
+                    }
+                    else if (!isInteger(cap)){
+                        Toast.makeText(ClassActivity.this,"Please enter an integer for 'capacity'", Toast.LENGTH_LONG).show();
+                    }
+                    //if capacity is an integer but is smaller than 1
+                    else if (isInteger(cap) && Integer.parseInt(cap) < 1){
+                        Toast.makeText(ClassActivity.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
                     }
                     else if(!classDescription.isEmpty() && !classTitle.isEmpty()){
                         db3.updateName(classID, classTitle);
@@ -141,10 +148,12 @@ public class ClassActivity extends AppCompatActivity {
                     }
                     else{
                         db3.updateName(classID, classTitle);
+
                     }
+                    db3.updateCapacity(classID, Integer.parseInt(cap));
                 }
                 catch(Exception e){
-                    Toast.makeText(ClassActivity.this,"Exception occurred", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClassActivity.this,"Exception occurred: " + e, Toast.LENGTH_LONG).show();
                 }
 
                 Toast.makeText(ClassActivity.this,"Updated Class!", Toast.LENGTH_LONG).show();
@@ -160,7 +169,17 @@ public class ClassActivity extends AppCompatActivity {
         builder.setTitle(title);
         builder.setMessage(Message);
         builder.show();
+    }
 
+    public boolean isInteger(String s) {
+        try {
+            Integer.parseInt(s);
+        }   catch (NumberFormatException e) {
+            return false;
+        }   catch (NullPointerException e) {
+            return false;
+        }
+        return true;
     }
 
 }
