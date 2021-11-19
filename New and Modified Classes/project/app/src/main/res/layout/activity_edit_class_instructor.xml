@@ -90,7 +90,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Capacity"
+            android:hint="Edit Capacity"
             app:boxStrokeColor="@color/black"
             app:boxStrokeWidthFocused="2dp"
             app:endIconTint="@color/black"
@@ -111,6 +111,7 @@
         <EditText
             android:id="@+id/insGetTime"
             android:layout_width="match_parent"
+            android:hint="Edit the Time (24hrs)"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="time" />
