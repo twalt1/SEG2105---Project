@@ -22,4 +22,139 @@ public class Class {
         this.capacity = capacity;
         this.instructor = instructor;
     }
+
+    public Class() {
+
+    }
+
+    /*
+    Getters and Setters are created.
+     */
+
+    public void setTitle(String title) {
+
+        this.title = title;
+
+    }
+
+    public void setDescription(String description) {
+
+        this.description = description;
+
+    }
+
+    public void setDifficulty(String difficulty) {
+
+        this.difficulty = difficulty;
+
+    }
+
+    public void setDate(String date) {
+
+        this.date = date;
+
+    }
+    public void setTime(String time) {
+
+        this.time = time;
+
+    }
+
+    public void setCapacity(int capacity) {
+
+        this.capacity = capacity;
+
+    }
+
+    public void setInstructor(String instructor) {
+
+        this.instructor = instructor;
+
+    }
+
+    public void setType(String type) {
+
+        this.type = type;
+
+    }
+
+    public String getTitle() {
+
+        return title;
+
+    }
+
+    public String getDescription() {
+
+        return description;
+
+    }
+
+    public String getDifficulty() {
+
+        return difficulty;
+
+    }
+
+    public String getDate() {
+
+        return date;
+
+    }
+
+    public String getTime() {
+
+        return time;
+
+    }
+
+    public int getCapacity() {
+
+        return capacity;
+
+    }
+
+    public String getType() {
+
+        return type;
+
+    }
+
+    public String getInstructor() {
+
+        return instructor;
+
+    }
+
+    /** This method checks whether there is a conflict of a class
+     *
+     * @param aClass Type Class
+     * @return true if there is no conflict; false otherwise
+     */
+    public boolean checkClass(Class aClass) {
+
+        if (this.getTitle().equals(aClass.getTitle()) && this.getDate().equals(aClass.getDate())) {
+
+            return false;
+
+        }
+
+        return true;
+
+    }
+
+    public String toString(){
+
+        String res = "Title: " + title + "\n" + "Type: " + "\n" + "Description: " + description + "\n"
+                + "Difficulty: " + difficulty + "\n" + "Date" + date + "\n"
+                + "Time: " + time + "\n" + "Capacity: " + capacity + "\n" + "Instructor: " + instructor;
+
+        return res;
+
+    }
+
+    //String title, description, difficulty, date, time;
+    //Date[] dayOfWeek, time;
+    //int capacity;
+
 }
