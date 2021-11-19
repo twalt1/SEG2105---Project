@@ -4,24 +4,46 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 public class EditClassInstructor extends AppCompatActivity {
 
     Button viewClasses, cancelClasses, editClass;
     ImageButton back;
     DBClass db3;
+    Spinner typeDropDown, difficultyDropDown;
     EditText getClassId, getClassTitle, getClassDescription;
+    TextInputEditText capacity, startTime;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_class_instructor);
+
+        //drop down list to select type of class
+        typeDropDown = (Spinner) findViewById(R.id.classType_id2);
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.classType));
+        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        typeDropDown.setAdapter(typeAdapter);
+
+        //drop down list for difficulty
+        difficultyDropDown = (Spinner) findViewById(R.id.classDifficulty_id2);
+        ArrayAdapter<String> difficultyAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.difficultyType));
+        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        difficultyDropDown.setAdapter(difficultyAdapter);
+
+        capacity = findViewById(R.id.insEnterCap);
 
         viewClasses = findViewById(R.id.instructorView);
         back = findViewById(R.id.backBtn2);
@@ -77,13 +99,14 @@ public class EditClassInstructor extends AppCompatActivity {
                 StringBuffer buffer = new StringBuffer();
                 while (res.moveToNext()) {
 
-                    buffer.append("ID :" + res.getString(0) + "\n");
-                    buffer.append("Title :" + res.getString(1) + "\n");
-                    buffer.append("Description :" + res.getString(2) + "\n");
-                    buffer.append("Difficulty :" + res.getString(3) + "\n");
-                    buffer.append("Capacity :" + res.getString(4) + "\n");
-                    buffer.append("Date :" + res.getString(5) + "\n");
-                    buffer.append("Time :" + res.getString(6) + "\n");
+                    buffer.append("ID : " + res.getString(0) + "\n");
+                    buffer.append("Title : " + res.getString(1) + "\n");
+                    buffer.append("Type : " + res.getString(2) + "\n");
+                    buffer.append("Description : " + res.getString(3) + "\n");
+                    buffer.append("Difficulty : " + res.getString(4) + "\n");
+                    buffer.append("Capacity : " + res.getString(5) + "\n");
+                    buffer.append("Date : " + res.getString(6) + "\n");
+                    buffer.append("Time : " + res.getString(7) + "\n\n");
 
                 }
 
@@ -98,6 +121,9 @@ public class EditClassInstructor extends AppCompatActivity {
             public void onClick(View view) {
                 try{
                     String classID = getClassId.getText().toString();
+                    String type = typeDropDown.getSelectedItem().toString();
+                    String diff = difficultyDropDown.getSelectedItem().toString();
+                    String cap = capacity.getText().toString();
                     String classDescription = getClassDescription.getText().toString();
                     String classTitle = getClassTitle.getText().toString();
                     if (classTitle.isEmpty() && classDescription.isEmpty()){
@@ -120,6 +146,8 @@ public class EditClassInstructor extends AppCompatActivity {
                 catch(Exception e){
                     Toast.makeText(EditClassInstructor.this,"Exception occurred", Toast.LENGTH_LONG).show();
                 }
+
+                Toast.makeText(EditClassInstructor.this,"Updated Class!", Toast.LENGTH_LONG).show();
 
             }
         });
