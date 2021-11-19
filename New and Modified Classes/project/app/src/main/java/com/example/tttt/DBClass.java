@@ -116,4 +116,18 @@ public class DBClass extends SQLiteOpenHelper {
         cv.put(COL_6, time);
         database.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
     }
+
+    public void updateDifficulty(String id, String difficulty){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_3, difficulty);
+        database.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
+    }
+
+    public void updateType(String id, String type){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_TYPE, type);
+        database.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
+    }
 }

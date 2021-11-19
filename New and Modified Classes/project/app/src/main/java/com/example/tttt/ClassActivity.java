@@ -151,6 +151,8 @@ public class ClassActivity extends AppCompatActivity {
 
                     }
                     db3.updateCapacity(classID, Integer.parseInt(cap));
+                    db3.updateDifficulty(classID, diff);
+                    db3.updateType(classID, type);
                 }
                 catch(Exception e){
                     Toast.makeText(ClassActivity.this,"Exception occurred: " + e, Toast.LENGTH_LONG).show();
