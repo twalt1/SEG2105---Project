@@ -82,8 +82,11 @@ public class DBClass extends SQLiteOpenHelper {
     public Cursor getAllData() {
 
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
-        return res;
+        String query = "SELECT * FROM " + TABLE_NAME;
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        return cursor;
 
     }
 
@@ -137,4 +140,118 @@ public class DBClass extends SQLiteOpenHelper {
         cv.put(COL_TYPE, type);
         database.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
     }
+
+    /** To store a class to the database.
+     *
+     * @param aClass Type Class
+     * @return True if successfully added; False otherwise
+     */
+
+    public boolean addClass(Class aClass) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1, aClass.getTitle());
+        contentValues.put(COL_TYPE, aClass.getType());
+        contentValues.put(COL_2, aClass.getDescription());
+        contentValues.put(COL_3, aClass.getDifficulty());
+        contentValues.put(COL_4, aClass.getCapacity());
+        contentValues.put(COL_5, aClass.getDate());
+        contentValues.put(COL_6, aClass.getTime());
+        contentValues.put(COL_INSTRUCTOR, aClass.getInstructor());
+
+        long result = db.insert(TABLE_NAME, null, contentValues);
+        db.close();
+
+        return result != -1;
+
+    }
+
+    public boolean checkExist(String title, String date) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE " + COL_1 + "=?" + " AND " + COL_5 + "=?", new String[] {title, date});
+        boolean res = c.getCount() > 0;
+        c.close();
+
+        return res;
+
+    }
+
+    /** To find a class in the database, return a empty class if not exist.
+     *
+     * @param title The title of the class (!Have not tested yet!)
+     * @return  a type Class
+     */
+
+    public Class findClass(String title) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COL_1
+                + " = \"" + title + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+        Class aClass = new Class();
+
+        if (cursor.moveToFirst()) {
+
+            aClass.setTitle(cursor.getString(0));
+            aClass.setType(cursor.getString(1));
+            aClass.setDescription(cursor.getString(2));
+            aClass.setDifficulty(cursor.getString(3));
+            aClass.setCapacity(Integer.parseInt(cursor.getString(4)));
+            aClass.setDate(cursor.getString(5));
+            aClass.setTime(cursor.getString(6));
+            aClass.setInstructor(cursor.getString(7));
+            cursor.close();
+
+        }   else {
+
+            aClass = null;
+
+        }
+
+        db.close();
+
+        return aClass;
+
+    }
+
+    /** To delete a class by searching title.
+     *
+     * @param title A String as a title of the class (!Have not tested yet!)
+     * @return  True if deleteClass successful; False otherwise
+     */
+
+    public boolean deleteClass(String title) {
+
+        boolean res = false;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COL_1
+                + " = \"" + title + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {
+
+            String titleStr = cursor.getString(0);
+            db.delete(TABLE_NAME, COL_1 + " = " + titleStr, null);
+            cursor.close();
+            res = true;
+
+        }
+
+        db.close();
+
+        return res;
+
+    }
+
 }
