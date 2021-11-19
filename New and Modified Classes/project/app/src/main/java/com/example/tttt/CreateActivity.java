@@ -119,7 +119,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
                 String diff = difficultyDropDown.getSelectedItem().toString();
                 String cap = capacity.getText().toString();
                 String time = startTime.getText().toString();
-                Integer c2 = 0;
+                boolean allValidInput = false;
 
                 //we will print out message to make sure we got the right input
                 String enteredPrint = "You entered: ";
@@ -131,7 +131,44 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
                 enteredPrint += "\ntime = " + time;
                 Toast.makeText(getApplicationContext(), enteredPrint, Toast.LENGTH_SHORT).show();
 
+                //if capacity is not an integer
+                if (!isInteger(cap)) {
+                    Toast.makeText(getApplicationContext(), "Please enter an integer for 'capacity'", Toast.LENGTH_SHORT).show();
+                }
 
+                //if capacity is an integer but is smaller than 1
+                else if (isInteger(cap) && Integer.parseInt(cap) < 1){
+                    Toast.makeText(getApplicationContext(), "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
+                }
+                //if one of the inputs is empty
+                else if (titl.equals("") || desc.equals("") || diff.equals("") || cap.equals("") || time.equals("") || date.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter all the fields.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    //if all the above cases are false, then the inputs are valid
+                    allValidInput = true;
+                }
+
+                if (allValidInput) {
+
+
+                    //Now we insert (create) a new class in the database
+                    Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, "admin");
+
+                    if (insert) {
+
+                        Toast.makeText(getApplicationContext(), "Class created!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
+                        startActivity(intent);
+
+                    } else {
+
+                        Toast.makeText(getApplicationContext(), "Class not created.", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+                /*
                 if (!isInteger(cap)) {
 
                     Toast.makeText(CreateActivity.this, "Please enter correct number.", Toast.LENGTH_SHORT).show();
@@ -142,12 +179,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
 
                 }
 
-                /*
-                //check if anything is null then report error
-                if (titl == null || type == null || desc == null || diff == null || cap == null || time == null){
-                    Toast.makeText(CreateActivity.this, "Encounter null value", Toast.LENGTH_SHORT).show();
-                }
-                */
+
 
                 if (titl.equals("") || desc.equals("") || diff.equals("") || cap.equals("") || time.equals("") || date.equals("")) {
 
@@ -171,6 +203,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
 
 
                 }
+                */
 
             }
         });

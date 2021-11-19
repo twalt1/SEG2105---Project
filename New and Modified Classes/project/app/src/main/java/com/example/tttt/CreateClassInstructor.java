@@ -121,7 +121,6 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
                 String diff = difficultyDropDown.getSelectedItem().toString();
                 String cap = capacity.getText().toString();
                 String time = startTime.getText().toString();
-                Integer c2 = 0;
 
                 boolean allValidInput = false;
 
