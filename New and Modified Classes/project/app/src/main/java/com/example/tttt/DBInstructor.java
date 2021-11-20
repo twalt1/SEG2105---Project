@@ -133,6 +133,4 @@ public class DBInstructor extends SQLiteOpenHelper {
         return instructor;
     }
 
-
-
 }

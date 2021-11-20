@@ -47,7 +47,7 @@ public class InstructorActivity extends AppCompatActivity {
 
         });
 
-        btn3.setOnClickListener(new View.OnClickListener() {
+        btn4.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
 
