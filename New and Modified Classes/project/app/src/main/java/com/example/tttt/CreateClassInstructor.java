@@ -161,19 +161,25 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
                     SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
                     String instructorEmail = currentUserSession.getString("email", "");
 
-                    //Now we insert (create) a new class in the database
-                    Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, instructorEmail, dayOfWeek);
+                    if (!db3.checkExist(type, date)) {
 
-                    if (insert) {
+                        Toast.makeText(getApplicationContext(), "Class already exists.", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(CreateClassInstructor.this, "Class created!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
-                        startActivity(intent);
+                    }   else {
+                        //Now we insert (create) a new class in the database
+                        Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, instructorEmail, dayOfWeek);
 
-                    } else {
+                        if (insert) {
 
-                        Toast.makeText(CreateClassInstructor.this, "Class not created.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateClassInstructor.this, "Class created!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
+                            startActivity(intent);
 
+                        } else {
+
+                            Toast.makeText(CreateClassInstructor.this, "Class not created.", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 }
 
