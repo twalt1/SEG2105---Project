@@ -103,9 +103,9 @@ public class ClassActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Integer deletedRows = db3.deleteData(getClassId.getText().toString());
+                boolean deletedRows = db3.deleteData(getClassId.getText().toString());
 
-                if (deletedRows > 0) {
+                if (deletedRows == true) {
 
                     Toast.makeText(ClassActivity.this, "Data Updated.", Toast.LENGTH_LONG).show();
 
@@ -147,20 +147,31 @@ public class ClassActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Invalid hour.", Toast.LENGTH_SHORT).show();
                     }
                     //if description isn't empty and the class title isn't empty
-                    if(!classDescription.isEmpty()){
+                    else if(!classDescription.isEmpty() && !classTitle.isEmpty() && !time.isEmpty()){
+                        db3.updateName(classID, classTitle);
                         db3.updateDescription(classID, classDescription);
-                    }
-                    if(!time.isEmpty() && (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24)){
                         db3.updateTime(classID, time);
                     }
-                    if(!classTitle.isEmpty()){
+                    else if(!classDescription.isEmpty() && !time.isEmpty()){
+                        db3.updateDescription(classID, classDescription);
+                        db3.updateTime(classID, time);
+                    }
+                    else if(!classDescription.isEmpty() && !classTitle.isEmpty()){
+                        db3.updateDescription(classID, classDescription);
                         db3.updateName(classID, classTitle);
                     }
-                    if(!cap.isEmpty()){
-                        db3.updateCapacity(classID, Integer.parseInt(cap));
-                    }
-                    if (!time.isEmpty()){
+                    else if(!time.isEmpty() && !classTitle.isEmpty()){
                         db3.updateTime(classID, time);
+                        db3.updateName(classID, classTitle);
+                    }
+                    else if (!time.isEmpty()){
+                        db3.updateTime(classID, time);
+                    }
+                    else if (!classDescription.isEmpty()){
+                        db3.updateDescription(classID, classDescription);
+                    }
+                    else{
+                        db3.updateName(classID, classTitle);
                     }
 
                 }
