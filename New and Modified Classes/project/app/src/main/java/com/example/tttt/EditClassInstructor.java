@@ -76,9 +76,9 @@ public class EditClassInstructor extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Integer deletedRows = db3.deleteData(getClassId.getText().toString());
+                boolean deletedRows = db3.deleteData(getClassId.getText().toString());
 
-                if (deletedRows > 0) {
+                if (deletedRows == true) {
 
                     Toast.makeText(EditClassInstructor.this, "Data Updated.", Toast.LENGTH_LONG).show();
 
