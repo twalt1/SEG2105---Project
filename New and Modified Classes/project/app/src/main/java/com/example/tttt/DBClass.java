@@ -1,5 +1,7 @@
 package com.example.tttt;
 
+import static android.os.Build.ID;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -11,6 +13,7 @@ public class DBClass extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Class.db";
     public static final String TABLE_NAME = "Class_table";
+    public static final String COL_ID = "ID";
     public static final String COL_TYPE = "Type";
     public static final String COL_1 = "Title";
     public static final String COL_2 = "Description";
@@ -30,7 +33,20 @@ public class DBClass extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT," +" TITLE TEXT, TYPE TEXT, DESCRIPTION TEXT, DIFFICULTY TEXT, CAPACITY INTEGER, DATE TEXT, TIME TEXT, INSTRUCTOR TEXT, DAYOFWEEK TEXT)");
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME
+                + "(" + COL_ID + " INTEGER PRIMARY KEY,"
+                + COL_1 + " TEXT,"
+                + COL_TYPE + " TEXT,"
+                + COL_2 + " TEXT,"
+                + COL_3 + " TEXT,"
+                + COL_4 + " TEXT,"
+                + COL_5 + " TEXT,"
+                + COL_6 + " TEXT,"
+                + COL_INSTRUCTOR + " TEXT,"
+                + COL_DAYOFWEEK + " TEXT" +
+                ")";
+
+        db.execSQL(CREATE_TABLE);
 
     }
 
@@ -60,6 +76,7 @@ public class DBClass extends SQLiteOpenHelper {
         newclass = new Class(title, type, description, difficulty, capacity, date, time, instructor, dayOfWeek);
 
         long res = db.insert(TABLE_NAME, null, contentValues);
+        db.close();
 
         if(res == -1) {
 
@@ -74,10 +91,37 @@ public class DBClass extends SQLiteOpenHelper {
 
     }
 
-    public Integer deleteData (String id) {
+    //public Integer deleteData (String id) {
+
+    //    SQLiteDatabase db = this.getWritableDatabase();
+    //    db.close();
+    //    return db.delete(TABLE_NAME, "ID = ?", new String[] {id});
+
+    //}
+
+    public boolean deleteData(String id) {
 
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, "ID = ?", new String[] {id});
+        boolean res = false;
+
+        String query = "SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COL_ID
+                + " =\"" + id + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if(cursor.moveToFirst()) {
+
+            String str = cursor.getString(0);
+            db.delete(TABLE_NAME, COL_ID + " = " + str, null);
+            cursor.close();
+            res = true;
+
+        }
+
+        db.close();
+
+        return res;
 
     }
 
@@ -178,15 +222,30 @@ public class DBClass extends SQLiteOpenHelper {
 
     }
 
-    public boolean checkExist(String title, String date) {
+    /** Check whether conflict exists
+     *
+     * @param type Type of class
+     * @param date Date of class
+     * @return True if no conflict; False otherwise
+     */
+
+    public boolean checkExist(String type, String date) {
 
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor c = db.rawQuery("SELECT * FROM " + TABLE_NAME +" WHERE " + COL_1 + "=?" + " AND " + COL_5 + "=?", new String[] {title, date});
-        boolean res = c.getCount() > 0;
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COL_TYPE+"=?" +" AND " + COL_5+"=?", new String[] {type,date});
+        boolean res = !(c.getCount() > 0);
         c.close();
 
         return res;
+
+    }
+
+    public Integer getNum(String type, String date) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COL_TYPE+"=?" +" AND " + COL_5+"=?", new String[] {type,date});
+        return c.getCount();
 
     }
 
