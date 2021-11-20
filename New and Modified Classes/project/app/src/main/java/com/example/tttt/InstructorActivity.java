@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class InstructorActivity extends AppCompatActivity {
 
 
-    Button btn1, btn2, btn3;
+    Button btn1, btn2, btn3, btn4;
     ImageButton btn;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class InstructorActivity extends AppCompatActivity {
         btn2 = findViewById(R.id.instructorAdd);
         btn = findViewById(R.id.instructorBack);
         btn3 = findViewById((R.id.searchClass));
+        btn4 = findViewById((R.id.searchInstructor));
 
         btn1.setOnClickListener(new View.OnClickListener() {
 
@@ -40,6 +41,17 @@ public class InstructorActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), SearchClassInstructor.class);
+                startActivity(intent);
+
+            }
+
+        });
+
+        btn3.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), SearchInstructorName.class);
                 startActivity(intent);
 
             }
