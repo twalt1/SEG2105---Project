@@ -142,7 +142,7 @@ public class Class {
      */
     public boolean checkClass(Class aClass) {
 
-        if (this.getTitle().equals(aClass.getTitle()) && this.getDate().equals(aClass.getDate())) {
+        if (this.getType().equals(aClass.getType()) && this.getDate().equals(aClass.getDate())) {
 
             return false;
 
