@@ -97,7 +97,8 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-        date = "day/month/year: " + dayOfMonth + "/" + month + 1 + "/" + year;
+        month += 1;
+        date = "day/month/year: " + dayOfMonth + "/" + month + "/" + year;
     }
 
 

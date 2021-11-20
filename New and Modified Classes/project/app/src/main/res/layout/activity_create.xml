@@ -32,7 +32,7 @@
             android:text="@string/create_class"
             android:textAllCaps="true"
             android:textColor="@color/black"
-            android:textSize="48sp" />
+            android:textSize="44sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
