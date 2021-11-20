@@ -147,8 +147,8 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
                     Toast.makeText(CreateClassInstructor.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
                 }
                 //if one of the inputs is empty
-                else if (titl.equals("") || desc.equals("") || diff.equals("") || cap.equals("") || time.equals("") || date.equals("")) {
-                    Toast.makeText(CreateClassInstructor.this, "Please enter all the fields.", Toast.LENGTH_SHORT).show();
+                else if (titl.equals("") || desc.equals("") || diff.equals("") || cap.equals("") || time.equals("") || Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24 || date.equals("")) {
+                    Toast.makeText(CreateClassInstructor.this, "Please correctly fill all the fields.", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     //if all the above cases are false, then the inputs are valid

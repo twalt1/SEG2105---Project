@@ -153,8 +153,8 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
                     Toast.makeText(getApplicationContext(), "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
                 }
                 //if one of the inputs is empty
-                else if (titl.equals("") || desc.equals("") || diff.equals("") || cap.equals("") || time.equals("") || date.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Please enter all the fields.", Toast.LENGTH_SHORT).show();
+                else if (titl.equals("") || desc.equals("") || diff.equals("") || cap.equals("") || time.equals("") || Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24 || date.equals("")) {
+                    Toast.makeText(CreateActivity.this, "Please correctly fill all the fields.", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     //if all the above cases are false, then the inputs are valid
@@ -170,7 +170,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
                     if (insert) {
 
                         Toast.makeText(getApplicationContext(), "Class created!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
                         startActivity(intent);
 
                     } else {

@@ -138,39 +138,39 @@ public class EditClassInstructor extends AppCompatActivity {
                     String time = getClassTime.getText().toString();
                     String classDescription = getClassDescription.getText().toString();
                     String classTitle = getClassTitle.getText().toString();
-                    String dayOfWeek = dayOfWeekDropDown.getSelectedItem().toString();
-
-
-                    if (classTitle.isEmpty() && classDescription.isEmpty()){
-                        Toast.makeText(EditClassInstructor.this,"Both title and description fields cannot be empty", Toast.LENGTH_LONG).show();
+                    if (classTitle.isEmpty() && classDescription.isEmpty() && time.isEmpty() && cap.isEmpty()){
+                        Toast.makeText(EditClassInstructor.this,"All fields cannot be empty", Toast.LENGTH_LONG).show();
                     }
                     else if(classID.isEmpty()){
                         Toast.makeText(EditClassInstructor.this,"Must input a class ID to update", Toast.LENGTH_LONG).show();
                     }
-                    else if (!isInteger(cap)){
+                    else if (!isInteger(cap) && cap.length()!=0){
                         Toast.makeText(EditClassInstructor.this,"Please enter an integer for 'capacity'", Toast.LENGTH_LONG).show();
                     }
                     //if capacity is an integer but is smaller than 1
                     else if (isInteger(cap) && Integer.parseInt(cap) < 1){
-                        Toast.makeText(EditClassInstructor.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditClassInstructor.this, "Class's capacity must be greater than one", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24) {
+                        Toast.makeText(getApplicationContext(), "Invalid hour.", Toast.LENGTH_SHORT).show();
                     }
                     //if description isn't empty and the class title isn't empty
-                    else if(!classDescription.isEmpty() && !classTitle.isEmpty()){
-                        db3.updateName(classID, classTitle);
+                    if(!classDescription.isEmpty()){
                         db3.updateDescription(classID, classDescription);
+                    }
+                    if(!time.isEmpty()){
                         db3.updateTime(classID, time);
                     }
-                    else if(!classDescription.isEmpty()){
-                        db3.updateDescription(classID, classDescription);
-                    }
-                    else{
+                    if(!classTitle.isEmpty()){
                         db3.updateName(classID, classTitle);
                     }
+                    if(!cap.isEmpty()){
+                        db3.updateCapacity(classID, Integer.parseInt(cap));
+                    }
+                    if (!time.isEmpty() && (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24)){
+                        db3.updateTime(classID, time);
+                    }
 
-                    db3.updateCapacity(classID, Integer.parseInt(cap));
-                    db3.updateDifficulty(classID, diff);
-                    db3.updateType(classID, type);
-                    db3.updateDayOfWeek(classID, dayOfWeek);
                 }
                 catch(Exception e){
                     Toast.makeText(EditClassInstructor.this,"Exception occurred: " + e, Toast.LENGTH_LONG).show();
