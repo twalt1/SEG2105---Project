@@ -147,8 +147,8 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
                     Toast.makeText(CreateClassInstructor.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
                 }
                 //if one of the inputs is empty
-                else if (titl.equals("") || desc.equals("") || diff.equals("") || cap.equals("") || time.equals("") || Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24 || date.equals("")) {
-                    Toast.makeText(CreateClassInstructor.this, "Please correctly fill all the fields.", Toast.LENGTH_SHORT).show();
+                else if (titl.equals("") || desc.equals("") || diff.equals("") || cap.equals("") || time.equals("") || date.equals("")) {
+                    Toast.makeText(CreateClassInstructor.this, "Please enter all the fields.", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     //if all the above cases are false, then the inputs are valid
@@ -161,19 +161,25 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
                     SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
                     String instructorEmail = currentUserSession.getString("email", "");
 
-                    //Now we insert (create) a new class in the database
-                    Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, instructorEmail, dayOfWeek);
+                    if (!db3.checkExist(type, date)) {
 
-                    if (insert) {
+                        Toast.makeText(getApplicationContext(), "Class already exists.", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(CreateClassInstructor.this, "Class created!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
-                        startActivity(intent);
+                    }   else {
+                        //Now we insert (create) a new class in the database
+                        Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, instructorEmail, dayOfWeek);
 
-                    } else {
+                        if (insert) {
 
-                        Toast.makeText(CreateClassInstructor.this, "Class not created.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CreateClassInstructor.this, "Class created!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
+                            startActivity(intent);
 
+                        } else {
+
+                            Toast.makeText(CreateClassInstructor.this, "Class not created.", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 }
 
