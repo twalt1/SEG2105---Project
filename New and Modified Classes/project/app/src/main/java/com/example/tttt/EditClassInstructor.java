@@ -106,7 +106,9 @@ public class EditClassInstructor extends AppCompatActivity {
                     buffer.append("Difficulty : " + res.getString(4) + "\n");
                     buffer.append("Capacity : " + res.getString(5) + "\n");
                     buffer.append("Date : " + res.getString(6) + "\n");
-                    buffer.append("Time : " + res.getString(7) + "\n\n");
+                    buffer.append("Time : " + res.getString(7) + "\n");
+                    buffer.append("Instructor : " + res.getString(8) + "\n");
+                    buffer.append("Day of week : " + res.getString(9) + "\n\n");
 
                 }
 

@@ -19,6 +19,7 @@ public class DBClass extends SQLiteOpenHelper {
     public static final String COL_5 = "Date";
     public static final String COL_6 = "Time";
     public static final String COL_INSTRUCTOR = "Instructor";
+    public static final String COL_DAYOFWEEK = "DayOfWeek";
     //public static final String COL_7 = "Status";
     Class newclass;
 
@@ -29,7 +30,7 @@ public class DBClass extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT," +" TITLE TEXT, TYPE TEXT, DESCRIPTION TEXT, DIFFICULTY TEXT, CAPACITY INTEGER, DATE TEXT, TIME TEXT, INSTRUCTOR TEXT)");
+        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT," +" TITLE TEXT, TYPE TEXT, DESCRIPTION TEXT, DIFFICULTY TEXT, CAPACITY INTEGER, DATE TEXT, TIME TEXT, INSTRUCTOR TEXT, DAYOFWEEK TEXT)");
 
     }
 
@@ -42,7 +43,7 @@ public class DBClass extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertData(String title, String type, String description, String difficulty, Integer capacity, String date, String time, String instructor) {
+    public boolean insertData(String title, String type, String description, String difficulty, Integer capacity, String date, String time, String instructor, String dayOfWeek) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -54,8 +55,9 @@ public class DBClass extends SQLiteOpenHelper {
         contentValues.put(COL_5, date);
         contentValues.put(COL_6, time);
         contentValues.put(COL_INSTRUCTOR, instructor);
+        contentValues.put(COL_DAYOFWEEK, dayOfWeek);
 
-        newclass = new Class(title, type, description, difficulty, capacity, date, time, instructor);
+        newclass = new Class(title, type, description, difficulty, capacity, date, time, instructor, dayOfWeek);
 
         long res = db.insert(TABLE_NAME, null, contentValues);
 
@@ -160,6 +162,7 @@ public class DBClass extends SQLiteOpenHelper {
         contentValues.put(COL_5, aClass.getDate());
         contentValues.put(COL_6, aClass.getTime());
         contentValues.put(COL_INSTRUCTOR, aClass.getInstructor());
+        contentValues.put(COL_DAYOFWEEK, aClass.getDayOfWeek());
 
         long result = db.insert(TABLE_NAME, null, contentValues);
         db.close();
@@ -207,6 +210,7 @@ public class DBClass extends SQLiteOpenHelper {
             aClass.setDate(cursor.getString(5));
             aClass.setTime(cursor.getString(6));
             aClass.setInstructor(cursor.getString(7));
+            aClass.setDayOfWeek(cursor.getString(8));
             cursor.close();
 
         }   else {

@@ -113,6 +113,11 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <Spinner
+                android:id="@+id/dayOfWeek_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,7 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="256dp"
         android:layout_weight="1"
-        android:text="Choose a date"
+        android:text="Choose a start date"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

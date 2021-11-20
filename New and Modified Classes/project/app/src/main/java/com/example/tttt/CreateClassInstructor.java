@@ -20,7 +20,7 @@ import java.util.Calendar;
 public class CreateClassInstructor extends MainActivity implements DatePickerDialog.OnDateSetListener{
     DBClass db3;
     TextInputEditText title, description, capacity, startTime;
-    Spinner typeDropDown, difficultyDropDown;
+    Spinner typeDropDown, difficultyDropDown, dayOfWeekDropDown;
     Button btn, btn1;
     ImageButton btn2;
     static String date;
@@ -46,6 +46,13 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.difficultyType));
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultyDropDown.setAdapter(difficultyAdapter);
+
+        //drop down list for dayofweek
+        dayOfWeekDropDown = (Spinner) findViewById(R.id.dayOfWeek_id);
+        ArrayAdapter<String> dayOfWeekAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.dayOfWeek));
+        dayOfWeekAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dayOfWeekDropDown.setAdapter(dayOfWeekAdapter);
 
         description = findViewById(R.id.enterDesc);
         capacity = findViewById(R.id.insEnterCap);
@@ -113,7 +120,9 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
                 String diff = difficultyDropDown.getSelectedItem().toString();
                 String cap = capacity.getText().toString();
                 String time = startTime.getText().toString();
+                String dayOfWeek = dayOfWeekDropDown.getSelectedItem().toString();
 
+                //let's make sure all inputs are valid
                 boolean allValidInput = false;
 
                 //we will print out message to make sure we got the right input
@@ -123,6 +132,7 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
                 enteredPrint += "\ndescription = " + desc;
                 enteredPrint += "\ndifficulty = " + diff;
                 enteredPrint += "\ncapacity = " + cap;
+                enteredPrint += "\nday of week = " + dayOfWeek;
                 enteredPrint += "\ntime = " + time;
                 Toast.makeText(getApplicationContext(), enteredPrint, Toast.LENGTH_SHORT).show();
 
@@ -152,7 +162,7 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
                     String instructorEmail = currentUserSession.getString("email", "");
 
                     //Now we insert (create) a new class in the database
-                    Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, instructorEmail);
+                    Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, instructorEmail, dayOfWeek);
 
                     if (insert) {
 

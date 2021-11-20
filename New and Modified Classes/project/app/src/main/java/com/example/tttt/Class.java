@@ -3,7 +3,7 @@ package com.example.tttt;
 import java.util.Date;
 
 public class Class {
-    String title, type, description, difficulty, date, time, instructor;
+    String title, type, description, difficulty, date, time, instructor, dayOfWeek;
     //Date[] dayOfWeek, time;
     int capacity;
 
@@ -12,7 +12,7 @@ public class Class {
         make a dropdown menu in the class enroll interface (once it is created)
      */
 
-    public Class(String title, String type, String description, String difficulty, int capacity, String date, String time, String instructor) {
+    public Class(String title, String type, String description, String difficulty, int capacity, String date, String time, String instructor, String dayOfWeek) {
         this.title = title;
         this.type = type;
         this.description = description;
@@ -21,6 +21,7 @@ public class Class {
         this.time = time;
         this.capacity = capacity;
         this.instructor = instructor;
+        this.dayOfWeek = dayOfWeek;
     }
 
     public Class() {
@@ -76,6 +77,14 @@ public class Class {
 
         this.type = type;
 
+    }
+
+    public void setDayOfWeek(String dayOfWeek){
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    public String getDayOfWeek(){
+        return dayOfWeek;
     }
 
     public String getTitle() {
