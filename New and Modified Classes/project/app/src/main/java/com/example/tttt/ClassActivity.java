@@ -130,48 +130,41 @@ public class ClassActivity extends AppCompatActivity {
                     String time = getTime.getText().toString();
                     String classDescription = getClassDescription.getText().toString();
                     String classTitle = getClassTitle.getText().toString();
+
                     if (classTitle.isEmpty() && classDescription.isEmpty() && time.isEmpty()){
-                        Toast.makeText(ClassActivity.this,"Both all fields cannot be empty", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ClassActivity.this,"Both title and description fields cannot be empty", Toast.LENGTH_LONG).show();
                     }
                     else if(classID.isEmpty()){
                         Toast.makeText(ClassActivity.this,"Must input a class ID to update", Toast.LENGTH_LONG).show();
                     }
-                    else if (!isInteger(cap) && cap.length()!=0){
+                    else if (!isInteger(cap) && cap.length() != 0){
                         Toast.makeText(ClassActivity.this,"Please enter an integer for 'capacity'", Toast.LENGTH_LONG).show();
                     }
                     //if capacity is an integer but is smaller than 1
                     else if (isInteger(cap) && Integer.parseInt(cap) < 1){
-                        Toast.makeText(ClassActivity.this, "Class's capacity must be greater than one", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ClassActivity.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
                     }
-                    else if (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24) {
-                        Toast.makeText(getApplicationContext(), "Invalid hour.", Toast.LENGTH_SHORT).show();
+                    else if(!time.isEmpty()&&(Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24)){
+                        Toast.makeText(ClassActivity.this, "Invalid Time", Toast.LENGTH_SHORT).show();
                     }
                     //if description isn't empty and the class title isn't empty
-                    else if(!classDescription.isEmpty() && !classTitle.isEmpty() && !time.isEmpty()){
-                        db3.updateName(classID, classTitle);
-                        db3.updateDescription(classID, classDescription);
+                    if (!cap.isEmpty() && Integer.parseInt(cap) > 1){
+                        db3.updateCapacity(classID, Integer.parseInt(cap));
+                    }
+                    if (!diff.isEmpty()) {
+                        db3.updateDifficulty(classID, diff);
+                    }
+                    if(!type.isEmpty()) {
+                        db3.updateType(classID, type);
+                    }
+                    if(!time.isEmpty() && (Integer.parseInt(time) > 0 && Integer.parseInt(time) < 24)){
                         db3.updateTime(classID, time);
                     }
-                    else if(!classDescription.isEmpty() && !time.isEmpty()){
-                        db3.updateDescription(classID, classDescription);
-                        db3.updateTime(classID, time);
-                    }
-                    else if(!classDescription.isEmpty() && !classTitle.isEmpty()){
-                        db3.updateDescription(classID, classDescription);
+                    if(!classTitle.isEmpty()){
                         db3.updateName(classID, classTitle);
                     }
-                    else if(!time.isEmpty() && !classTitle.isEmpty()){
-                        db3.updateTime(classID, time);
-                        db3.updateName(classID, classTitle);
-                    }
-                    else if (!time.isEmpty()){
-                        db3.updateTime(classID, time);
-                    }
-                    else if (!classDescription.isEmpty()){
+                    if(!classDescription.isEmpty()){
                         db3.updateDescription(classID, classDescription);
-                    }
-                    else{
-                        db3.updateName(classID, classTitle);
                     }
 
                 }

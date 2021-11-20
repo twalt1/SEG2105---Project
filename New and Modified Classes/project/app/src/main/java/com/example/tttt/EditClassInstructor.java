@@ -141,36 +141,44 @@ public class EditClassInstructor extends AppCompatActivity {
                     String dayOfWeek = dayOfWeekDropDown.getSelectedItem().toString();
 
 
-                    if (classTitle.isEmpty() && classDescription.isEmpty()){
+                    if (classTitle.isEmpty() && classDescription.isEmpty() && time.isEmpty()){
                         Toast.makeText(EditClassInstructor.this,"Both title and description fields cannot be empty", Toast.LENGTH_LONG).show();
                     }
                     else if(classID.isEmpty()){
                         Toast.makeText(EditClassInstructor.this,"Must input a class ID to update", Toast.LENGTH_LONG).show();
                     }
-                    else if (!isInteger(cap)){
+                    else if (!isInteger(cap) && cap.length() != 0){
                         Toast.makeText(EditClassInstructor.this,"Please enter an integer for 'capacity'", Toast.LENGTH_LONG).show();
                     }
                     //if capacity is an integer but is smaller than 1
                     else if (isInteger(cap) && Integer.parseInt(cap) < 1){
                         Toast.makeText(EditClassInstructor.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
                     }
+                    else if(!time.isEmpty()&&(Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24)){
+                        Toast.makeText(EditClassInstructor.this, "Invalid Time", Toast.LENGTH_SHORT).show();
+                    }
                     //if description isn't empty and the class title isn't empty
-                    else if(!classDescription.isEmpty() && !classTitle.isEmpty()){
-                        db3.updateName(classID, classTitle);
-                        db3.updateDescription(classID, classDescription);
+                    if (!cap.isEmpty() && Integer.parseInt(cap) > 1){
+                        db3.updateCapacity(classID, Integer.parseInt(cap));
+                    }
+                    if (!diff.isEmpty()) {
+                        db3.updateDifficulty(classID, diff);
+                    }
+                    if(!type.isEmpty()) {
+                        db3.updateType(classID, type);
+                    }
+                    if(!dayOfWeek.isEmpty()) {
+                        db3.updateDayOfWeek(classID, dayOfWeek);
+                    }
+                    if(!time.isEmpty() && (Integer.parseInt(time) > 0 && Integer.parseInt(time) < 24)){
                         db3.updateTime(classID, time);
                     }
-                    else if(!classDescription.isEmpty()){
-                        db3.updateDescription(classID, classDescription);
-                    }
-                    else{
+                    if(!classTitle.isEmpty()){
                         db3.updateName(classID, classTitle);
                     }
-
-                    db3.updateCapacity(classID, Integer.parseInt(cap));
-                    db3.updateDifficulty(classID, diff);
-                    db3.updateType(classID, type);
-                    db3.updateDayOfWeek(classID, dayOfWeek);
+                    if(!classDescription.isEmpty()){
+                        db3.updateDescription(classID, classDescription);
+                    }
                 }
                 catch(Exception e){
                     Toast.makeText(EditClassInstructor.this,"Exception occurred: " + e, Toast.LENGTH_LONG).show();
