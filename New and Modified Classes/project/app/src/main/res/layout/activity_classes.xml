@@ -48,7 +48,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="395dp"
-        android:layout_height="350dp"
+        android:layout_height="400dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,6 +79,11 @@
 
         <Spinner
             android:id="@+id/classDifficulty_id3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/dayOfWeek_id4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

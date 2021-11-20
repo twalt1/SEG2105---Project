@@ -21,7 +21,7 @@ public class ClassActivity extends AppCompatActivity {
     Button viewClasses, deleteClass, editClass;
     ImageButton back;
     DBClass db3;
-    Spinner typeDropDown, difficultyDropDown;
+    Spinner typeDropDown, difficultyDropDown, dayOfWeekDropDown;
     EditText getClassId, getClassTitle, getClassDescription;
     TextInputEditText capacity, startTime;
 
@@ -42,6 +42,13 @@ public class ClassActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.difficultyType));
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultyDropDown.setAdapter(difficultyAdapter);
+
+        //drop down list for dayofweek
+        dayOfWeekDropDown = (Spinner) findViewById(R.id.dayOfWeek_id4);
+        ArrayAdapter<String> dayOfWeekAdapter = new ArrayAdapter<String>(getApplicationContext(),
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.dayOfWeek));
+        dayOfWeekAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dayOfWeekDropDown.setAdapter(dayOfWeekAdapter);
 
         capacity = findViewById(R.id.insEnterCap);
 
@@ -128,6 +135,9 @@ public class ClassActivity extends AppCompatActivity {
                     String cap = capacity.getText().toString();
                     String classDescription = getClassDescription.getText().toString();
                     String classTitle = getClassTitle.getText().toString();
+                    String dayOfWeek = dayOfWeekDropDown.getSelectedItem().toString();
+
+
                     if (classTitle.isEmpty() && classDescription.isEmpty()){
                         Toast.makeText(ClassActivity.this,"Both title and description fields cannot be empty", Toast.LENGTH_LONG).show();
                     }
@@ -155,6 +165,7 @@ public class ClassActivity extends AppCompatActivity {
                     db3.updateCapacity(classID, Integer.parseInt(cap));
                     db3.updateDifficulty(classID, diff);
                     db3.updateType(classID, type);
+                    db3.updateDayOfWeek(classID, dayOfWeek);
                 }
                 catch(Exception e){
                     Toast.makeText(ClassActivity.this,"Exception occurred: " + e, Toast.LENGTH_LONG).show();

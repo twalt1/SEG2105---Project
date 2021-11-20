@@ -143,6 +143,13 @@ public class DBClass extends SQLiteOpenHelper {
         database.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
     }
 
+    public void updateDayOfWeek(String id, String dayOfWeek){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COL_DAYOFWEEK, dayOfWeek);
+        database.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
+    }
+
     /** To store a class to the database.
      *
      * @param aClass Type Class
