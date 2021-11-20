@@ -21,8 +21,8 @@ public class ClassActivity extends AppCompatActivity {
     Button viewClasses, deleteClass, editClass;
     ImageButton back;
     DBClass db3;
-    Spinner typeDropDown, difficultyDropDown, dayOfWeekDropDown;
-    EditText getClassId, getClassTitle, getClassDescription;
+    Spinner typeDropDown, difficultyDropDown;
+    EditText getClassId, getClassTitle, getClassDescription, getTime;
     TextInputEditText capacity, startTime;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +43,6 @@ public class ClassActivity extends AppCompatActivity {
         typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultyDropDown.setAdapter(difficultyAdapter);
 
-        //drop down list for dayofweek
-        dayOfWeekDropDown = (Spinner) findViewById(R.id.dayOfWeek_id4);
-        ArrayAdapter<String> dayOfWeekAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.dayOfWeek));
-        dayOfWeekAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dayOfWeekDropDown.setAdapter(dayOfWeekAdapter);
-
         capacity = findViewById(R.id.insEnterCap);
 
         viewClasses = findViewById(R.id.classView);
@@ -59,6 +52,7 @@ public class ClassActivity extends AppCompatActivity {
         getClassId = findViewById(R.id.getClassID);
         getClassTitle = findViewById(R.id.getClassTitle);
         getClassDescription = findViewById(R.id.getClassDescr);
+        getTime = findViewById(R.id.editTime2);
 
         db3 = new DBClass(this);
 
@@ -133,39 +127,53 @@ public class ClassActivity extends AppCompatActivity {
                     String type = typeDropDown.getSelectedItem().toString();
                     String diff = difficultyDropDown.getSelectedItem().toString();
                     String cap = capacity.getText().toString();
+                    String time = getTime.getText().toString();
                     String classDescription = getClassDescription.getText().toString();
                     String classTitle = getClassTitle.getText().toString();
-                    String dayOfWeek = dayOfWeekDropDown.getSelectedItem().toString();
-
-
-                    if (classTitle.isEmpty() && classDescription.isEmpty()){
-                        Toast.makeText(ClassActivity.this,"Both title and description fields cannot be empty", Toast.LENGTH_LONG).show();
+                    if (classTitle.isEmpty() && classDescription.isEmpty() && time.isEmpty()){
+                        Toast.makeText(ClassActivity.this,"Both all fields cannot be empty", Toast.LENGTH_LONG).show();
                     }
                     else if(classID.isEmpty()){
                         Toast.makeText(ClassActivity.this,"Must input a class ID to update", Toast.LENGTH_LONG).show();
                     }
-                    else if (!isInteger(cap)){
+                    else if (!isInteger(cap) && cap.length()!=0){
                         Toast.makeText(ClassActivity.this,"Please enter an integer for 'capacity'", Toast.LENGTH_LONG).show();
                     }
                     //if capacity is an integer but is smaller than 1
                     else if (isInteger(cap) && Integer.parseInt(cap) < 1){
-                        Toast.makeText(ClassActivity.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ClassActivity.this, "Class's capacity must be greater than one", Toast.LENGTH_SHORT).show();
                     }
-                    else if(!classDescription.isEmpty() && !classTitle.isEmpty()){
+                    else if (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24) {
+                        Toast.makeText(getApplicationContext(), "Invalid hour.", Toast.LENGTH_SHORT).show();
+                    }
+                    //if description isn't empty and the class title isn't empty
+                    else if(!classDescription.isEmpty() && !classTitle.isEmpty() && !time.isEmpty()){
                         db3.updateName(classID, classTitle);
                         db3.updateDescription(classID, classDescription);
+                        db3.updateTime(classID, time);
                     }
-                    else if(!classDescription.isEmpty()){
+                    else if(!classDescription.isEmpty() && !time.isEmpty()){
+                        db3.updateDescription(classID, classDescription);
+                        db3.updateTime(classID, time);
+                    }
+                    else if(!classDescription.isEmpty() && !classTitle.isEmpty()){
+                        db3.updateDescription(classID, classDescription);
+                        db3.updateName(classID, classTitle);
+                    }
+                    else if(!time.isEmpty() && !classTitle.isEmpty()){
+                        db3.updateTime(classID, time);
+                        db3.updateName(classID, classTitle);
+                    }
+                    else if (!time.isEmpty()){
+                        db3.updateTime(classID, time);
+                    }
+                    else if (!classDescription.isEmpty()){
                         db3.updateDescription(classID, classDescription);
                     }
                     else{
                         db3.updateName(classID, classTitle);
-
                     }
-                    db3.updateCapacity(classID, Integer.parseInt(cap));
-                    db3.updateDifficulty(classID, diff);
-                    db3.updateType(classID, type);
-                    db3.updateDayOfWeek(classID, dayOfWeek);
+
                 }
                 catch(Exception e){
                     Toast.makeText(ClassActivity.this,"Exception occurred: " + e, Toast.LENGTH_LONG).show();
@@ -174,6 +182,7 @@ public class ClassActivity extends AppCompatActivity {
                 Toast.makeText(ClassActivity.this,"Updated Class!", Toast.LENGTH_LONG).show();
 
             }
+
         });
     }
 
@@ -198,3 +207,4 @@ public class ClassActivity extends AppCompatActivity {
     }
 
 }
+
