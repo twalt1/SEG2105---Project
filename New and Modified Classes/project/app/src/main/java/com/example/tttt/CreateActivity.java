@@ -59,7 +59,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
         btn1 = findViewById(R.id.confirmChangesBtn);
         btn2 = findViewById(R.id.backbutton3);
 
-        AddData();
+        //AddData();
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,36 +87,6 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
             }
         });
 
-    }
-
-    public boolean isInteger(String s) {
-
-        try {
-
-            Integer.parseInt(s);
-
-        }   catch (NumberFormatException e) {
-
-            return false;
-
-        }   catch (NullPointerException e) {
-
-            return false;
-
-        }
-
-        return true;
-
-    }
-
-    @Override
-    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
-        month += 1;
-        date = "day/month/year: " + dayOfMonth + "/" + month + "/" + year;
-    }
-
-
-    public void AddData() {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -164,19 +134,29 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
                 if (allValidInput) {
 
 
-                    //Now we insert (create) a new class in the database
-                    Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, "admin", dayOfWeek);
+                    if (!db3.checkExist(type, date)) {
 
-                    if (insert) {
+                        Toast.makeText(getApplicationContext(), "Class already exists.", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(getApplicationContext(), "Class created!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
-                        startActivity(intent);
+                    }   else {
 
-                    } else {
+                        //Now we insert (create) a new class in the database
+                        Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, "admin", dayOfWeek);
 
-                        Toast.makeText(getApplicationContext(), "Class not created.", Toast.LENGTH_SHORT).show();
+                        if (insert) {
 
+                            Integer res = db3.getNum(type, date);
+                            String t = String.valueOf(res);
+                            Toast.makeText(getApplicationContext(), t, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Class created!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
+                            startActivity(intent);
+
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Class not created.", Toast.LENGTH_SHORT).show();
+
+                        }
                     }
                 }
 
@@ -219,7 +199,39 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
 
             }
         });
+
     }
+
+    public boolean isInteger(String s) {
+
+        try {
+
+            Integer.parseInt(s);
+
+        }   catch (NumberFormatException e) {
+
+            return false;
+
+        }   catch (NullPointerException e) {
+
+            return false;
+
+        }
+
+        return true;
+
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+        month += 1;
+        date = "day/month/year: " + dayOfMonth + "/" + month + "/" + year;
+    }
+
+
+    //public void AddData() {
+
+    //}
 
 
 }
