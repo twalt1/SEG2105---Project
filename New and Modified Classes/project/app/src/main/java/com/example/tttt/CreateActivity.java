@@ -145,10 +145,10 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
 
                         if (insert) {
 
-                            Integer res = db3.getNum(type, date);
-                            String t = String.valueOf(res);
-                            Toast.makeText(getApplicationContext(), t, Toast.LENGTH_SHORT).show();
-                            //Toast.makeText(getApplicationContext(), "Class created!", Toast.LENGTH_SHORT).show();
+                            //Integer res = db3.getNum(type, date);
+                            //String t = String.valueOf(res);
+                            //Toast.makeText(getApplicationContext(), t, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Class created!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
                             startActivity(intent);
 
