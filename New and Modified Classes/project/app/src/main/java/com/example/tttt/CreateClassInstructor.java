@@ -146,6 +146,13 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
                 else if (isInteger(cap) && Integer.parseInt(cap) < 1){
                     Toast.makeText(CreateClassInstructor.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
                 }
+
+                else if (date == null) {
+
+                    Toast.makeText(getApplicationContext(), "Please select a date.", Toast.LENGTH_SHORT).show();
+
+                }
+
                 //if one of the inputs is empty
                 else if (titl.equals("") || desc.equals("") || diff.equals("") || cap.equals("") || time.equals("") || date.equals("")) {
                     Toast.makeText(CreateClassInstructor.this, "Please enter all the fields.", Toast.LENGTH_SHORT).show();
