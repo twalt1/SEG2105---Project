@@ -13,6 +13,12 @@
             android:name=".EditClassInstructor"
             android:exported="true" />
         <activity
+            android:name=".SearchInstructorName"
+            android:exported="true"/>
+        <activity
+            android:name=".ClassSearchActivity"
+            android:exported="true" />
+        <activity
             android:name=".CreateClassInstructor"
             android:exported="true" />
         <activity
