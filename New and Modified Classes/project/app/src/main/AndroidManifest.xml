@@ -16,8 +16,8 @@
             android:name=".SearchInstructorName"
             android:exported="true"/>
         <activity
-            android:name=".SearchClassInstructor"
-            android:exported="true"/>
+            android:name=".ClassSearchActivity"
+            android:exported="true" />
         <activity
             android:name=".CreateClassInstructor"
             android:exported="true" />

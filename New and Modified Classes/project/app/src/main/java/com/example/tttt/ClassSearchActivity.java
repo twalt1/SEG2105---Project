@@ -1,5 +1,6 @@
 package com.example.tttt;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -9,20 +10,18 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SearchInstructorName extends AppCompatActivity {
+public class ClassSearchActivity extends AppCompatActivity {
     DBClass db = new DBClass(this);
-    EditText txt, txt2;
-    Button btn, btn2;
-    String text, text2;
+    EditText txt;
+    Button btn;
+    String text;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instructor_search);
+        setContentView(R.layout.activity_instructor_class_search);
 
         btn = findViewById(R.id.searchInst);
         txt = findViewById(R.id.txtInstructor);
-        btn2 = findViewById(R.id.searchInst2);
-        txt2 = findViewById(R.id.txtClass);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,51 +64,6 @@ public class SearchInstructorName extends AppCompatActivity {
                                 "were found.");
                     }
                     showMessage("Instructors", buffer.toString());
-                }
-            }
-        });
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                text2 = txt2.getText().toString();
-                Cursor cursor = db.getAllData();
-                cursor.moveToNext();
-                if (cursor.getCount() == 0) {
-                    showMessage("Error", "No Classes Registered.");
-                } else {
-                    StringBuffer buffer = new StringBuffer();
-
-                    if (text2.equals(cursor.getString(1))) {
-                        buffer.append("Title :" + cursor.getString(1) + "\n");
-                        buffer.append(" Type:" + cursor.getString(2) + "\n");
-                        buffer.append("Description :" + cursor.getString(3) + "\n");
-                        buffer.append("Difficulty :" + cursor.getString(4) + "\n");
-                        buffer.append("Capacity :" + cursor.getString(5) + "\n");
-                        buffer.append("Date :" + cursor.getString(6) + "\n");
-                        buffer.append("Time :" + cursor.getString(7)+"\n");
-                        buffer.append("Instructor Email :" + cursor.getString(8)+"\n");
-                        buffer.append("Day of Week :" + cursor.getString(9)+"\n\n");
-                    };
-                    while (cursor.moveToNext()) {
-                        if (text2.equals(cursor.getString(1))) {
-                            buffer.append("Title :" + cursor.getString(1) + "\n");
-                            buffer.append(" Type:" + cursor.getString(2) + "\n");
-                            buffer.append("Description :" + cursor.getString(3) + "\n");
-                            buffer.append("Difficulty :" + cursor.getString(4) + "\n");
-                            buffer.append("Capacity :" + cursor.getString(5) + "\n");
-                            buffer.append("Date :" + cursor.getString(6) + "\n");
-                            buffer.append("Time :" + cursor.getString(7)+"\n");
-                            buffer.append("Instructor Email :" + cursor.getString(8)+"\n");
-                            buffer.append("Day of Week :" + cursor.getString(9)+"\n\n");
-                        }
-
-                    }
-                    if (buffer.equals("")) {
-                        showMessage("Error", "No class with title " + text + " " +
-                                "were found.");
-                    }
-                    showMessage("Classes", buffer.toString());
                 }
             }
         });
