@@ -26,19 +26,19 @@
     <string name="insID">Instructor ID:</string>
     <string name="create_class">Create a Class:</string>
 
-    <string-array name = "classType">
+    <string-array name="classType">
         <item>Yoga</item>
         <item>Cardio</item>
         <item>Weight Lifting</item>
     </string-array>
 
-    <string-array name = "difficultyType">
+    <string-array name="difficultyType">
         <item>Beginner</item>
         <item>Intermediate</item>
         <item>Advanced</item>
     </string-array>
 
-    <string-array name = "dayOfWeek">
+    <string-array name="dayOfWeek">
         <item>Monday</item>
         <item>Tuesday</item>
         <item>Wednesday</item>

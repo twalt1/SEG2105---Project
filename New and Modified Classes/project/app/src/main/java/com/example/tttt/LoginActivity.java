@@ -120,6 +120,12 @@ public class LoginActivity extends AppCompatActivity {
                     //if in Gym Member database
                     else {
 
+                        //we'll store member username and email in the Shared Preferences session
+                        GymMember gymMember = db1.getInstructorFromUsernameAndPassword(enteredUsername, enteredPassword);
+                        editor.putString("username", gymMember.getUserName());
+                        editor.putString("email", gymMember.getEmail());
+                        editor.commit();
+
                         Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
                         //start new welcome page
 

@@ -10,11 +10,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
+            android:name=".UnenrollClassesMember"
+            android:exported="true" />
+        <activity
+            android:name=".EnrollClassesMember"
+            android:exported="true" />
+        <activity
+            android:name=".ViewClassesMember"
+            android:exported="true" />
+        <activity
+            android:name=".UserActivity"
+            android:exported="true" />
+        <activity
             android:name=".EditClassInstructor"
             android:exported="true" />
         <activity
             android:name=".SearchInstructorName"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".ClassSearchActivity"
             android:exported="true" />
