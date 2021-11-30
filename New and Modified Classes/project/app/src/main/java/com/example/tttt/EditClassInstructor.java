@@ -16,6 +16,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class EditClassInstructor extends AppCompatActivity {
 
     Button viewClasses, cancelClasses, editClass;
@@ -115,7 +119,15 @@ public class EditClassInstructor extends AppCompatActivity {
                     buffer.append("Date : " + res.getString(6) + "\n");
                     buffer.append("Time : " + res.getString(7) + "\n");
                     buffer.append("Instructor : " + res.getString(8) + "\n");
-                    buffer.append("Day of week : " + res.getString(9) + "\n\n");
+                    buffer.append("Day of week : " + res.getString(9) + "\n");
+
+                    String stringOfMembers = res.getString(10);
+                    String[] arrayOfMembers = stringOfMembers.split(",");
+                    List<String> listMembers = new ArrayList<String>();
+                    listMembers = Arrays.asList(arrayOfMembers);
+
+                    buffer.append("# Members : " + (listMembers.size()-1) + "\n");
+                    buffer.append("\n");
 
                 }
 

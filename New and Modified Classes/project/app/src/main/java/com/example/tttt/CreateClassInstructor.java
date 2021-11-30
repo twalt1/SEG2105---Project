@@ -174,7 +174,7 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
 
                     }   else {
                         //Now we insert (create) a new class in the database
-                        Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, instructorEmail, dayOfWeek);
+                        Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, instructorEmail, dayOfWeek, "");
 
                         if (insert) {
 

@@ -23,6 +23,7 @@ public class DBClass extends SQLiteOpenHelper {
     public static final String COL_6 = "Time";
     public static final String COL_INSTRUCTOR = "Instructor";
     public static final String COL_DAYOFWEEK = "DayOfWeek";
+    public static final String COL_MEMBERLIST = "MemberList";
     //public static final String COL_7 = "Status";
     Class newclass;
 
@@ -35,16 +36,17 @@ public class DBClass extends SQLiteOpenHelper {
 
         String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME
                 + "(" + COL_ID + " INTEGER PRIMARY KEY,"
-                + COL_1 + " TEXT,"
-                + COL_TYPE + " TEXT,"
-                + COL_2 + " TEXT,"
-                + COL_3 + " TEXT,"
-                + COL_4 + " TEXT,"
-                + COL_5 + " TEXT,"
-                + COL_6 + " TEXT,"
-                + COL_INSTRUCTOR + " TEXT,"
-                + COL_DAYOFWEEK + " TEXT" +
-                ")";
+                + COL_1 + " TEXT, "
+                + COL_TYPE + " TEXT, "
+                + COL_2 + " TEXT, "
+                + COL_3 + " TEXT, "
+                + COL_4 + " TEXT, "
+                + COL_5 + " TEXT, "
+                + COL_6 + " TEXT, "
+                + COL_INSTRUCTOR + " TEXT, "
+                + COL_DAYOFWEEK + " TEXT, "
+                + COL_MEMBERLIST + " TEXT "
+                + ")";
 
         db.execSQL(CREATE_TABLE);
 
@@ -59,7 +61,7 @@ public class DBClass extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertData(String title, String type, String description, String difficulty, Integer capacity, String date, String time, String instructor, String dayOfWeek) {
+    public boolean insertData(String title, String type, String description, String difficulty, Integer capacity, String date, String time, String instructor, String dayOfWeek, String MemberList) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -72,8 +74,9 @@ public class DBClass extends SQLiteOpenHelper {
         contentValues.put(COL_6, time);
         contentValues.put(COL_INSTRUCTOR, instructor);
         contentValues.put(COL_DAYOFWEEK, dayOfWeek);
+        contentValues.put(COL_MEMBERLIST, MemberList);
 
-        newclass = new Class(title, type, description, difficulty, capacity, date, time, instructor, dayOfWeek);
+        newclass = new Class(title, type, description, difficulty, capacity, date, time, instructor, dayOfWeek, MemberList);
 
         long res = db.insert(TABLE_NAME, null, contentValues);
         db.close();

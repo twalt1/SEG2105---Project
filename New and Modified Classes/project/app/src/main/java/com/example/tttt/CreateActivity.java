@@ -147,7 +147,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
                     }   else {
 
                         //Now we insert (create) a new class in the database
-                        Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, "admin", dayOfWeek);
+                        Boolean insert = db3.insertData(titl, type, desc, diff, Integer.parseInt(cap), date, time, "admin", dayOfWeek, "");
 
                         if (insert) {
 
@@ -155,7 +155,7 @@ public class CreateActivity extends MainActivity implements DatePickerDialog.OnD
                             //String t = String.valueOf(res);
                             //Toast.makeText(getApplicationContext(), t, Toast.LENGTH_SHORT).show();
                             Toast.makeText(getApplicationContext(), "Class created!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
                             startActivity(intent);
 
                         } else {

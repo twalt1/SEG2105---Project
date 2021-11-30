@@ -18,7 +18,7 @@ public class ClassTest {
 
     public Class setUp() {
 
-        Class c = new Class(title[0], type[0], description[0], difficulty[0], capacity[0], date[0], time[0], instructor[0], dayOfWeek[0]);
+        Class c = new Class(title[0], type[0], description[0], difficulty[0], capacity[0], date[0], time[0], instructor[0], dayOfWeek[0], "");
 
         return c;
 
@@ -181,7 +181,7 @@ public class ClassTest {
     public void test_checkClass() {
 
         Class c = setUp();
-        Class c2 = new Class(title[2], type[1], description[0], difficulty[1], capacity[2], date[2], time[1], instructor[2], dayOfWeek[1]);
+        Class c2 = new Class(title[2], type[1], description[0], difficulty[1], capacity[2], date[2], time[1], instructor[2], dayOfWeek[1], "");
         assertTrue(c.checkClass(c2));
 
         c2.setType(type[0]);

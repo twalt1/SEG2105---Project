@@ -1,9 +1,12 @@
 package com.example.tttt;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class Class {
-    String title, type, description, difficulty, date, time, instructor, dayOfWeek;
+    String title, type, description, difficulty, date, time, instructor, dayOfWeek, memberList;
     //Date[] dayOfWeek, time;
     int capacity;
 
@@ -12,7 +15,7 @@ public class Class {
         make a dropdown menu in the class enroll interface (once it is created)
      */
 
-    public Class(String title, String type, String description, String difficulty, int capacity, String date, String time, String instructor, String dayOfWeek) {
+    public Class(String title, String type, String description, String difficulty, int capacity, String date, String time, String instructor, String dayOfWeek, String memberList) {
         this.title = title;
         this.type = type;
         this.description = description;
@@ -22,6 +25,7 @@ public class Class {
         this.capacity = capacity;
         this.instructor = instructor;
         this.dayOfWeek = dayOfWeek;
+        this.memberList = memberList;
     }
 
     public Class() {
@@ -31,6 +35,13 @@ public class Class {
     /*
     Getters and Setters are created.
      */
+
+    public List<String> getMemberList(){
+        String[] list = memberList.split(",");
+        List<String> result = new ArrayList<String>();
+        result = Arrays.asList(list);
+        return result;
+    }
 
     public void setTitle(String title) {
 
