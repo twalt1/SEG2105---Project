@@ -115,11 +115,11 @@ public class ClassActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                boolean deletedRows = db3.deleteData(getClassId.getText().toString());
+                boolean deletedRows = db3.deleteData(getClassId.getText().toString(), "admin");
 
                 if (deletedRows == true) {
 
-                    Toast.makeText(ClassActivity.this, "Data Updated.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ClassActivity.this, "Deleted class.", Toast.LENGTH_LONG).show();
 
                 }   else {
 

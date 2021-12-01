@@ -1,6 +1,8 @@
 package com.example.tttt;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -79,8 +81,12 @@ public class EditClassInstructor extends AppCompatActivity {
         cancelClasses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //We need to get the email of the instructor (who created this class)
+                //When we insert a new class into the database, this class will have the email of the instructor
+                SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
+                String instructorEmail = currentUserSession.getString("email", "");
 
-                boolean deletedRows = db3.deleteData(getClassId.getText().toString());
+                boolean deletedRows = db3.deleteData(getClassId.getText().toString(), instructorEmail);
 
                 if (deletedRows == true) {
 
@@ -88,7 +94,7 @@ public class EditClassInstructor extends AppCompatActivity {
 
                 }   else {
 
-                    Toast.makeText(EditClassInstructor.this,"Data not Updated", Toast.LENGTH_LONG).show();
+                    Toast.makeText(EditClassInstructor.this,"Cannot delete a class that you didn't created", Toast.LENGTH_LONG).show();
 
                 }
 

@@ -102,7 +102,12 @@ public class DBClass extends SQLiteOpenHelper {
 
     //}
 
-    public boolean deleteData(String id) {
+    public boolean deleteData(String id, String emailOfDeleter) {
+        //check the email of the deleter (the person who wants to delete a class)
+        //if email not equal to the email of the instructor who created the class
+        //do not delete. The TA said so
+        //except the admin can delete any class regardless of creator
+
 
         SQLiteDatabase db = this.getWritableDatabase();
         boolean res = false;
@@ -114,8 +119,12 @@ public class DBClass extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
 
         if(cursor.moveToFirst()) {
-
             String str = cursor.getString(0);
+            String emailOfClassCreator = cursor.getString(8);
+
+            if (!emailOfDeleter.equals("admin") && !emailOfClassCreator.equals(emailOfDeleter)){
+                return false;
+            }
             db.delete(TABLE_NAME, COL_ID + " = " + str, null);
             cursor.close();
             res = true;
