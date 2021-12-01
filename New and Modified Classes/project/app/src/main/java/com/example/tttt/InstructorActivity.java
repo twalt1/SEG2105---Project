@@ -23,6 +23,7 @@ public class InstructorActivity extends AppCompatActivity {
         btn2 = findViewById(R.id.instructorAdd);
         btn = findViewById(R.id.instructorBack);
         btn3 = findViewById((R.id.searchInstructor));
+        btn4 = findViewById((R.id.viewMembers));
 
         btn1.setOnClickListener(new View.OnClickListener() {
 
@@ -40,6 +41,17 @@ public class InstructorActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), SearchInstructorName.class);
+                startActivity(intent);
+
+            }
+
+        });
+
+        btn4.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), ViewEnrolled.class);
                 startActivity(intent);
 
             }
