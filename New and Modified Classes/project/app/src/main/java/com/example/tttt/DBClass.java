@@ -7,6 +7,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -210,7 +212,7 @@ public class DBClass extends SQLiteOpenHelper {
         database.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
     }
 
-    public int updateMemberList(String id, String emailOfMember){
+    public int enrollMemberList(String id, String emailOfMember){
         SQLiteDatabase db = this.getWritableDatabase();
         int result = 0;
 
@@ -229,17 +231,95 @@ public class DBClass extends SQLiteOpenHelper {
                 cursor.close();
                 return -1;
             }
-            //if there is no comma, it means there's nothing in here
-            if (!stringOfMembers.contains(",")){
-                stringOfMembers += emailOfMember;
+            //if there is no comma
+            if (!stringOfMembers.contains(",") && stringOfMembers.isEmpty()){
+                stringOfMembers +=  emailOfMember;
             } else {
                 stringOfMembers += ", " + emailOfMember;
             }
             cursor.close();
             result = 1;
         }
+        ContentValues cv = new ContentValues();
+        cv.put(COL_MEMBERLIST, stringOfMembers);
+        db.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
+        return result;
+    }
+
+    public int unenrollMemberList(String id, String emailOfMember){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = 0;
+
+        String query = "SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COL_ID
+                + " =\"" + id + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        String stringOfMembers = "";
+        if(cursor.moveToFirst()) {
+            stringOfMembers = cursor.getString(10);
 
 
+            //if this member is not in this class. Cannot unenroll
+            if (!stringOfMembers.contains(emailOfMember)) {
+                cursor.close();
+                return -1;
+            }
+
+            //if contains member, remove him/her
+            if (stringOfMembers.contains(emailOfMember)) {
+                //convert to list then remove
+                String[] arrayOfMembers = stringOfMembers.split(",");
+                List<String> listMembers = new ArrayList<String>();
+                listMembers = Arrays.asList(arrayOfMembers);
+                //new string
+                String s = "";
+                //traverse through list
+                for (int i = 0; i < listMembers.size(); i++){
+                    //get each index
+                    String v = listMembers.get(i);
+                    v = v.trim();
+                    //if the string has characters (and not white space only)
+                    if (v.length() > 0) {
+                        //if we see the email of the member, skip it
+                        if (v.equals(emailOfMember)) {
+                            continue;
+                        }
+                        s += v;
+                        //if index is not at the end, then make sure to add comma
+                        if (i < listMembers.size() - 1) {
+                            s += ", ";
+                        }
+                    }
+                }
+                //set to new string
+                stringOfMembers = s;
+                result = 1;
+            }
+
+            /*
+            String[] arrayOfMembers = stringOfMembers.split(",");
+            List<String> listMembers = new ArrayList<String>();
+            listMembers = Arrays.asList(arrayOfMembers);
+            String cleanedStringOfMembers = "";
+            for (int i = 0; i < listMembers.size(); i++){
+                String v = listMembers.get(i);
+                //if the string has characters (and not white space only)
+                if (v.trim().length() > 0) {
+                    cleanedStringOfMembers += v;
+                    //if index is not at the end, then make sure to add comma
+                    if (i != listMembers.size() - 1) {
+                        cleanedStringOfMembers += ", ";
+                    }
+                }
+            }
+            stringOfMembers = cleanedStringOfMembers;
+            */
+
+
+            cursor.close();
+        }
         ContentValues cv = new ContentValues();
         cv.put(COL_MEMBERLIST, stringOfMembers);
         db.update(TABLE_NAME, cv, "ID = ?", new String[] { id });

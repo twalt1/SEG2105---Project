@@ -12,7 +12,7 @@ public class UserActivity extends AppCompatActivity {
 
 
     ImageButton backButton;
-    Button viewButton, enrollButton, unenrollButton;
+    Button viewButton, enrollOrUnenrollButton;
     ImageButton btn;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +22,7 @@ public class UserActivity extends AppCompatActivity {
 
         backButton = findViewById(R.id.backbutton_id);
         viewButton = findViewById(R.id.viewClasses_id);
-        enrollButton = findViewById(R.id.enroll_id);
-        unenrollButton = findViewById((R.id.unenroll_id));
+        enrollOrUnenrollButton = findViewById(R.id.enroll_id);
 
         viewButton.setOnClickListener(new View.OnClickListener() {
 
@@ -36,22 +35,11 @@ public class UserActivity extends AppCompatActivity {
 
         });
 
-        enrollButton.setOnClickListener(new View.OnClickListener() {
+        enrollOrUnenrollButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(), EnrollClassesMember.class);
-                startActivity(intent);
-
-            }
-
-        });
-
-        unenrollButton.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-
-                Intent intent = new Intent(getApplicationContext(), UnenrollClassesMember.class);
+                Intent intent = new Intent(getApplicationContext(), EnrollOrUnenrollClassesMember.class);
                 startActivity(intent);
 
             }
