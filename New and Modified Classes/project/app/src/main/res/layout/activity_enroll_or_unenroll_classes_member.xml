@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Enter the ID of the Class you Want to Edit/Delete"
+            android:hint="Enter the ID of the Class you Want to Enroll in"
             android:inputType="textPersonName" />
 
         <EditText
@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Edit Title"
+            android:hint="Enter Title"
             android:inputType="textPersonName" />
 
         <Spinner
@@ -90,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Edit Description"
+            android:hint="Enter Description"
             android:inputType="textPersonName" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -117,9 +117,9 @@
         <EditText
             android:id="@+id/time_id"
             android:layout_width="match_parent"
-            android:hint="Edit the Time (24hrs)"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Enter the Time (24hrs)"
             android:inputType="time" />
 
     </LinearLayout>

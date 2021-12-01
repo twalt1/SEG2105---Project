@@ -167,6 +167,9 @@ public class EnrollOrUnenrollClassesMember extends AppCompatActivity {
                     if (enrollStatus == -1){
                         Toast.makeText(EnrollOrUnenrollClassesMember.this,"You're already enrolled!", Toast.LENGTH_LONG).show();
                     }
+                    if (enrollStatus == -2){
+                        Toast.makeText(EnrollOrUnenrollClassesMember.this,"Class already at full capacity", Toast.LENGTH_LONG).show();
+                    }
 
                 }
                 catch(Exception e){
@@ -188,7 +191,6 @@ public class EnrollOrUnenrollClassesMember extends AppCompatActivity {
                     String classDescription = getClassDescription.getText().toString();
                     String classTitle = getClassTitle.getText().toString();
                     String dayOfWeek = dayOfWeekDropDown.getSelectedItem().toString();
-
 
                     if (classTitle.isEmpty() && classDescription.isEmpty() && time.isEmpty()){
                         Toast.makeText(EnrollOrUnenrollClassesMember.this,"Both title and description fields cannot be empty", Toast.LENGTH_LONG).show();

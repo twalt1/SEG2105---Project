@@ -223,8 +223,13 @@ public class DBClass extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
 
         String stringOfMembers = "";
+
         if(cursor.moveToFirst()) {
             stringOfMembers = cursor.getString(10);
+
+            String[] arrayOfMembers = stringOfMembers.split(",");
+            int numMembers = arrayOfMembers.length;
+            int classCap = cursor.getInt(10);
 
             //if this member already enrolled in this class
             if (stringOfMembers.contains(emailOfMember)) {
@@ -234,11 +239,16 @@ public class DBClass extends SQLiteOpenHelper {
             //if there is no comma
             if (!stringOfMembers.contains(",") && stringOfMembers.isEmpty()){
                 stringOfMembers +=  emailOfMember;
+            } else if (numMembers >= classCap){
+                cursor.close();
+                return -2;
             } else {
                 stringOfMembers += ", " + emailOfMember;
             }
             cursor.close();
             result = 1;
+            //if class is already at full capacity
+
         }
         ContentValues cv = new ContentValues();
         cv.put(COL_MEMBERLIST, stringOfMembers);
