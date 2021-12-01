@@ -9,6 +9,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class DBClass extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Class.db";
@@ -204,6 +208,42 @@ public class DBClass extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(COL_DAYOFWEEK, dayOfWeek);
         database.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
+    }
+
+    public int updateMemberList(String id, String emailOfMember){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = 0;
+
+        String query = "SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COL_ID
+                + " =\"" + id + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        String stringOfMembers = "";
+        if(cursor.moveToFirst()) {
+            stringOfMembers = cursor.getString(10);
+
+            //if this member already enrolled in this class
+            if (stringOfMembers.contains(emailOfMember)) {
+                cursor.close();
+                return -1;
+            }
+            //if there is no comma, it means there's nothing in here
+            if (!stringOfMembers.contains(",")){
+                stringOfMembers += emailOfMember;
+            } else {
+                stringOfMembers += ", " + emailOfMember;
+            }
+            cursor.close();
+            result = 1;
+        }
+
+
+        ContentValues cv = new ContentValues();
+        cv.put(COL_MEMBERLIST, stringOfMembers);
+        db.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
+        return result;
     }
 
     /** To store a class to the database.

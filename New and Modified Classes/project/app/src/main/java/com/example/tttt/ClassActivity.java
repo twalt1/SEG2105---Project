@@ -100,8 +100,13 @@ public class ClassActivity extends AppCompatActivity {
                     String[] arrayOfMembers = stringOfMembers.split(",");
                     List<String> listMembers = new ArrayList<String>();
                     listMembers = Arrays.asList(arrayOfMembers);
-
-                    buffer.append("# Members : " + (listMembers.size()-1) + "\n");
+                    int numMembers = -1;
+                    if (listMembers.toString().equals("[]")){
+                        numMembers = 0;
+                    } else {
+                        numMembers = listMembers.size();
+                    }
+                    buffer.append("# Members : " + numMembers + "\n");
                     buffer.append("\n");
 
                 }
