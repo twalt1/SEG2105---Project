@@ -47,10 +47,12 @@ public class ViewEnrolled extends AppCompatActivity {
                     showMessage("Error", "No classes are scheduled yet");
                     return;
                 }
+                if (txt.getText().toString() == null){
 
+                }
                 StringBuffer buffer = new StringBuffer();
                 while (res.moveToNext()) {
-                    if (res.getString(8).equals(email) && res.getString(8).equals(email)) {
+                    if (res.getString(8).equals(email)) {
                         showMessage("Members Enrolled", res.getString(10));
                         return;
                     }
@@ -64,7 +66,7 @@ public class ViewEnrolled extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
                 startActivity(intent);
 
             }
