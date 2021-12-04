@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Class {
-    String title, type, description, difficulty, date, time, instructor, dayOfWeek, memberList;
+    String id, title, type, description, difficulty, date, time, instructor, dayOfWeek, memberList;
     //Date[] dayOfWeek, time;
     int capacity;
 
@@ -15,7 +15,22 @@ public class Class {
         make a dropdown menu in the class enroll interface (once it is created)
      */
 
+    public Class(String id, String title, String type, String description, String difficulty, int capacity, String date, String time, String instructor, String dayOfWeek, String memberList) {
+        this.id = id;
+        this.title = title;
+        this.type = type;
+        this.description = description;
+        this.difficulty = difficulty;
+        this.date = date;
+        this.time = time;
+        this.capacity = capacity;
+        this.instructor = instructor;
+        this.dayOfWeek = dayOfWeek;
+        this.memberList = memberList;
+    }
+
     public Class(String title, String type, String description, String difficulty, int capacity, String date, String time, String instructor, String dayOfWeek, String memberList) {
+        //this.id = id;
         this.title = title;
         this.type = type;
         this.description = description;
@@ -143,6 +158,18 @@ public class Class {
     public String getInstructor() {
 
         return instructor;
+
+    }
+
+    public String getID() {
+
+        return id;
+
+    }
+
+    public void setID(String id) {
+
+        this.id = id;
 
     }
 
