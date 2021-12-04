@@ -175,53 +175,92 @@ public class EnrollOrUnenrollClassesMember extends AppCompatActivity {
                     String classDescription = getClassDescription.getText().toString();
                     String classTitle = getClassTitle.getText().toString();
                     String dayOfWeek = dayOfWeekDropDown.getSelectedItem().toString();
+                    Boolean checkConflict;
+                    Class aClass = null;
 
-                    if (classID.isEmpty()) {
+                    if (!classID.isEmpty()) {
+                        try {
 
-                        if (classTitle.isEmpty() && classDescription.isEmpty() && time.isEmpty()) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Both title and description fields cannot be empty", Toast.LENGTH_LONG).show();
-                        } else if (classID.isEmpty()) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Must input a class ID to update", Toast.LENGTH_LONG).show();
-                        } else if (!isInteger(cap) && cap.length() != 0) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Please enter an integer for 'capacity'", Toast.LENGTH_LONG).show();
-                        }
-                        //if capacity is an integer but is smaller than 1
-                        else if (isInteger(cap) && Integer.parseInt(cap) < 1) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
-                        } else if (!time.isEmpty() && (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24)) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Invalid Time", Toast.LENGTH_SHORT).show();
-                        }
+                            Integer x = Integer.parseInt(classID);
 
-                        SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
-                        String memberEmail = currentUserSession.getString("email", "");
-                        int enrollStatus = db3.enrollMemberList(classID, memberEmail);
-                        if (enrollStatus == 1) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Successfully enrolled!", Toast.LENGTH_LONG).show();
-                        }
-                        if (enrollStatus == -1) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "You're already enrolled!", Toast.LENGTH_LONG).show();
-                        }
-                        if (enrollStatus == -2) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Class already at full capacity", Toast.LENGTH_LONG).show();
-                        }
+                        } catch (NumberFormatException e) {
 
-                    }   else {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "The class ID must be a number", Toast.LENGTH_SHORT).show();
 
-                        SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
-                        String memberEmail = currentUserSession.getString("email", "");
-                        int enrollStatus = db3.enrollMemberList(classID, memberEmail);
-                        if (enrollStatus == 1) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Successfully enrolled!", Toast.LENGTH_LONG).show();
                         }
-                        if (enrollStatus == -1) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "You're already enrolled!", Toast.LENGTH_LONG).show();
-                        }
-                        if (enrollStatus == -2) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Class already at full capacity", Toast.LENGTH_LONG).show();
-                        }
+                    }
+
+                    if (!classID.isEmpty()) {
+
+                        aClass = db3.findClass(Integer.parseInt(classID));
+
+                    } else if (!classTitle.isEmpty()) {
+
+                        aClass = db3.findClass(classTitle);
+
+                    } else {
+
+                        Toast.makeText(EnrollOrUnenrollClassesMember.this, "Please at least enter the title or the id of the class", Toast.LENGTH_SHORT).show();
 
                     }
 
+                    checkConflict = db3.checkConflict(email, aClass.getDate());
+
+                    //if (checkConflict) {
+
+                        if (classID.isEmpty()) {
+
+                            if (classTitle.isEmpty()) {
+                                Toast.makeText(EnrollOrUnenrollClassesMember.this, "Please at least enter the title or the id of the class", Toast.LENGTH_LONG).show();
+                            }
+
+
+                                SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
+                                String memberEmail = currentUserSession.getString("email", "");
+                                int enrollStatus = db3.enrollMemberList(classID, memberEmail, checkConflict);
+                                if (enrollStatus == 1) {
+                                    Toast.makeText(EnrollOrUnenrollClassesMember.this, "Successfully enrolled!", Toast.LENGTH_LONG).show();
+                                }
+                                else if (enrollStatus == -1) {
+                                    Toast.makeText(EnrollOrUnenrollClassesMember.this, "You're already enrolled!", Toast.LENGTH_LONG).show();
+                                }
+                                else if (enrollStatus == -2) {
+                                    Toast.makeText(EnrollOrUnenrollClassesMember.this, "Class already at full capacity", Toast.LENGTH_LONG).show();
+                                }
+                                else if (enrollStatus == 0) {
+
+                                    Toast.makeText(EnrollOrUnenrollClassesMember.this, "There is conflict with another class you have enrolled", Toast.LENGTH_SHORT).show();
+
+                                }
+
+
+                        } else {
+
+                            SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
+                            String memberEmail = currentUserSession.getString("email", "");
+                            int enrollStatus = db3.enrollMemberList(classID, memberEmail, checkConflict);
+                            if (enrollStatus == -1) {
+                                Toast.makeText(EnrollOrUnenrollClassesMember.this, "You're already enrolled!", Toast.LENGTH_LONG).show();
+                            }
+                            else if (enrollStatus == -2) {
+                                Toast.makeText(EnrollOrUnenrollClassesMember.this, "Class already at full capacity", Toast.LENGTH_LONG).show();
+                            }
+                            else if (enrollStatus == 0) {
+
+                                Toast.makeText(EnrollOrUnenrollClassesMember.this, "There is conflict with another class you have enrolled", Toast.LENGTH_SHORT).show();
+
+                            }
+                            else if (enrollStatus == 1) {
+                                Toast.makeText(EnrollOrUnenrollClassesMember.this, "Successfully enrolled!", Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+
+                    //}   else {
+
+                    //    Toast.makeText(EnrollOrUnenrollClassesMember.this, "There is a conflict with another class you have enrolled", Toast.LENGTH_SHORT).show();
+
+                    //}
                 }
                 catch(Exception e){
                     Toast.makeText(EnrollOrUnenrollClassesMember.this,"Exception occurred: " + e, Toast.LENGTH_LONG).show();
