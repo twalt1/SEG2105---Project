@@ -16,9 +16,6 @@
             android:name=".EnrollOrUnenrollClassesMember"
             android:exported="true" />
         <activity
-            android:name=".ViewClassesMember"
-            android:exported="true" />
-        <activity
             android:name=".UserActivity"
             android:exported="true" />
         <activity
@@ -27,15 +24,11 @@
         <activity
             android:name=".SearchInstructorName"
             android:exported="true" />
-        <activity
-            android:name=".ClassSearchActivity"
-            android:exported="true" />
+
         <activity
             android:name=".CreateClassInstructor"
             android:exported="true" />
-        <activity
-            android:name=".UserWelcome"
-            android:exported="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
