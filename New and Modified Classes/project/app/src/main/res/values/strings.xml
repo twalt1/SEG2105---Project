@@ -25,6 +25,7 @@
     <string name="cusID">Gym Member ID:</string>
     <string name="insID">Instructor ID:</string>
     <string name="create_class">Create a Class:</string>
+    <string name="view_enroll">VIEW ENROLLED CLASSES</string>
 
     <string-array name="classType">
         <item>Yoga</item>
