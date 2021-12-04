@@ -34,6 +34,7 @@ public class Welcome extends AppCompatActivity {
                 if (got[1].equals("GymMember")) {
 
                     Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+                    intent.putExtra("username", got[0]);
                     startActivity(intent);
                     finish();
 
