@@ -170,7 +170,7 @@ public class CreateClassInstructor extends MainActivity implements DatePickerDia
 
                     if (!db3.checkExist(type, date)) {
 
-                        Toast.makeText(getApplicationContext(), "Class already exists.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "There is a conflict on that day.", Toast.LENGTH_SHORT).show();
 
                     }   else {
                         //Now we insert (create) a new class in the database
