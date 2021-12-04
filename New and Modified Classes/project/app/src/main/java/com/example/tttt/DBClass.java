@@ -82,7 +82,7 @@ public class DBClass extends SQLiteOpenHelper {
         contentValues.put(COL_DAYOFWEEK, dayOfWeek);
         contentValues.put(COL_MEMBERLIST, MemberList);
 
-        newclass = new Class(title, type, description, difficulty, capacity, date, time, instructor, dayOfWeek, MemberList);
+        //newclass = new Class(id, title, type, description, difficulty, capacity, date, time, instructor, dayOfWeek, MemberList);
 
         long res = db.insert(TABLE_NAME, null, contentValues);
         db.close();
@@ -336,12 +336,7 @@ public class DBClass extends SQLiteOpenHelper {
         return result;
     }
 
-    /** To store a class to the database.
-     *
-     * @param aClass Type Class
-     * @return True if successfully added; False otherwise
-     */
-
+    /*
     public boolean addClass(Class aClass) {
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -362,7 +357,7 @@ public class DBClass extends SQLiteOpenHelper {
 
         return result != -1;
 
-    }
+    }*/
 
     /** Check whether conflict exists
      *
@@ -410,15 +405,16 @@ public class DBClass extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
 
-            aClass.setTitle(cursor.getString(0));
-            aClass.setType(cursor.getString(1));
-            aClass.setDescription(cursor.getString(2));
-            aClass.setDifficulty(cursor.getString(3));
-            aClass.setCapacity(Integer.parseInt(cursor.getString(4)));
-            aClass.setDate(cursor.getString(5));
-            aClass.setTime(cursor.getString(6));
-            aClass.setInstructor(cursor.getString(7));
-            aClass.setDayOfWeek(cursor.getString(8));
+            aClass.setID(cursor.getString(0));
+            aClass.setTitle(cursor.getString(1));
+            aClass.setType(cursor.getString(2));
+            aClass.setDescription(cursor.getString(3));
+            aClass.setDifficulty(cursor.getString(4));
+            aClass.setCapacity(Integer.parseInt(cursor.getString(5)));
+            aClass.setDate(cursor.getString(6));
+            aClass.setTime(cursor.getString(7));
+            aClass.setInstructor(cursor.getString(8));
+            aClass.setDayOfWeek(cursor.getString(9));
             cursor.close();
 
         }   else {
@@ -463,6 +459,96 @@ public class DBClass extends SQLiteOpenHelper {
         db.close();
 
         return res;
+
+    }
+
+    /*public Cursor getAllData() {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME;
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        return cursor;
+
+    }*/
+
+    public ArrayList<Class> getEnrolled(String userEmail) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor c1 = getAllData();
+
+        ArrayList<Class> classes = new ArrayList<Class>();
+
+        Class aClass;
+
+        while (c1.moveToNext()) {
+
+            if (checkEnrolled(c1.getString(0), userEmail) == 1) {
+
+                aClass = findClass(c1.getString(1));
+                classes.add(aClass);
+
+            }
+
+
+        }
+        c1.close();
+
+        return classes;
+
+    }
+
+    public int checkEnrolled(String id, String emailOfMember) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = 0;
+
+        String query = "SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COL_ID
+                + " =\"" + id + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        String stringOfMembers = "";
+
+        if(cursor.moveToFirst()) {
+            stringOfMembers = cursor.getString(10);
+
+            /*
+            String[] arrayOfMembers = stringOfMembers.split(",");
+
+            int numMembers = arrayOfMembers.length;
+            int classCap = cursor.getInt(10);
+
+
+            //if this member already enrolled in this class
+            if (stringOfMembers.contains(emailOfMember)) {
+                cursor.close();
+                return -1;
+            }
+            //if there is no comma
+            if (!stringOfMembers.contains(",") && stringOfMembers.isEmpty()){
+                stringOfMembers +=  emailOfMember;
+            } else if (numMembers >= classCap){
+                cursor.close();
+                return -2;
+            } else {
+                stringOfMembers += ", " + emailOfMember;
+            }*/
+
+            if(!stringOfMembers.contains(emailOfMember)) {
+
+                return -1;
+
+            }
+            cursor.close();
+            result = 1;
+            //if class is already at full capacity
+
+        }
+
+        return result;
 
     }
 
