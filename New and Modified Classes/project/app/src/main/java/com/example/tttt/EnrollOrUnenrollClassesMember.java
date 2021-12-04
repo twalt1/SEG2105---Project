@@ -24,9 +24,10 @@ import java.util.List;
 
 public class EnrollOrUnenrollClassesMember extends AppCompatActivity {
 
-    Button viewClasses, enroll, unenroll;
+    Button viewClasses, enroll, unenroll, viewEnrolled;
     ImageButton back;
     DBClass db3;
+    DBUser db2;
     Spinner typeDropDown, difficultyDropDown, dayOfWeekDropDown;
     EditText getClassId, getClassTitle, getClassDescription, getClassTime;
     TextInputEditText capacity, startTime;
@@ -65,10 +66,45 @@ public class EnrollOrUnenrollClassesMember extends AppCompatActivity {
         getClassTitle = findViewById(R.id.title_id);
         getClassDescription = findViewById(R.id.description_id);
         getClassTime = findViewById(R.id.time_id);
+        viewEnrolled = findViewById(R.id.ViewEnrolled);
+        db2 = new DBUser(this);
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username1");
+        String email = db2.getUserEmail(username);
+        //Toast.makeText(EnrollOrUnenrollClassesMember.this, email, Toast.LENGTH_SHORT).show();
 
         db3 = new DBClass(this);
 
+        viewEnrolled.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                ArrayList<Class> classes = db3.getEnrolled(email);
+
+                StringBuffer buffer = new StringBuffer();
+
+                for(int i = 0; i < classes.size(); i++) {
+
+                    Class aClass = classes.get(i);
+
+                    buffer.append("ID : " + aClass.getID() + "\n");
+                    buffer.append("Title : " + aClass.getTitle() + "\n");
+                    buffer.append("Type : " + aClass.getType() + "\n");
+                    buffer.append("Description : " + aClass.getDescription() + "\n");
+                    buffer.append("Difficulty : " + aClass.getDifficulty() + "\n");
+                    buffer.append("Capacity : " + aClass.getCapacity() + "\n");
+                    buffer.append("Date : " + aClass.getDate() + "\n");
+                    buffer.append("Time : " + aClass.getTime() + "\n");
+                    buffer.append("Instructor : " + aClass.getInstructor() + "\n");
+                    buffer.append("Day of week : " + aClass.getDayOfWeek() + "\n");
+                    buffer.append("\n");
+
+                }
+
+                showMessage("Data", buffer.toString());
+
+            }
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +166,7 @@ public class EnrollOrUnenrollClassesMember extends AppCompatActivity {
             @Override
             //getClassId, getClassTitle
             public void onClick(View view) {
-                try{
+                try {
                     String classID = getClassId.getText().toString();
                     String type = typeDropDown.getSelectedItem().toString();
                     String diff = difficultyDropDown.getSelectedItem().toString();
@@ -140,35 +176,50 @@ public class EnrollOrUnenrollClassesMember extends AppCompatActivity {
                     String classTitle = getClassTitle.getText().toString();
                     String dayOfWeek = dayOfWeekDropDown.getSelectedItem().toString();
 
+                    if (classID.isEmpty()) {
 
-                    if (classTitle.isEmpty() && classDescription.isEmpty() && time.isEmpty()){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this,"Both title and description fields cannot be empty", Toast.LENGTH_LONG).show();
-                    }
-                    else if(classID.isEmpty()){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this,"Must input a class ID to update", Toast.LENGTH_LONG).show();
-                    }
-                    else if (!isInteger(cap) && cap.length() != 0){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this,"Please enter an integer for 'capacity'", Toast.LENGTH_LONG).show();
-                    }
-                    //if capacity is an integer but is smaller than 1
-                    else if (isInteger(cap) && Integer.parseInt(cap) < 1){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
-                    }
-                    else if(!time.isEmpty()&&(Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24)){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this, "Invalid Time", Toast.LENGTH_SHORT).show();
-                    }
+                        if (classTitle.isEmpty() && classDescription.isEmpty() && time.isEmpty()) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Both title and description fields cannot be empty", Toast.LENGTH_LONG).show();
+                        } else if (classID.isEmpty()) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Must input a class ID to update", Toast.LENGTH_LONG).show();
+                        } else if (!isInteger(cap) && cap.length() != 0) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Please enter an integer for 'capacity'", Toast.LENGTH_LONG).show();
+                        }
+                        //if capacity is an integer but is smaller than 1
+                        else if (isInteger(cap) && Integer.parseInt(cap) < 1) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
+                        } else if (!time.isEmpty() && (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24)) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Invalid Time", Toast.LENGTH_SHORT).show();
+                        }
 
-                    SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
-                    String memberEmail = currentUserSession.getString("email", "");
-                    int enrollStatus = db3.enrollMemberList(classID, memberEmail);
-                    if (enrollStatus == 1){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this,"Successfully enrolled!", Toast.LENGTH_LONG).show();
-                    }
-                    if (enrollStatus == -1){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this,"You're already enrolled!", Toast.LENGTH_LONG).show();
-                    }
-                    if (enrollStatus == -2){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this,"Class already at full capacity", Toast.LENGTH_LONG).show();
+                        SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
+                        String memberEmail = currentUserSession.getString("email", "");
+                        int enrollStatus = db3.enrollMemberList(classID, memberEmail);
+                        if (enrollStatus == 1) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Successfully enrolled!", Toast.LENGTH_LONG).show();
+                        }
+                        if (enrollStatus == -1) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "You're already enrolled!", Toast.LENGTH_LONG).show();
+                        }
+                        if (enrollStatus == -2) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Class already at full capacity", Toast.LENGTH_LONG).show();
+                        }
+
+                    }   else {
+
+                        SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
+                        String memberEmail = currentUserSession.getString("email", "");
+                        int enrollStatus = db3.enrollMemberList(classID, memberEmail);
+                        if (enrollStatus == 1) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Successfully enrolled!", Toast.LENGTH_LONG).show();
+                        }
+                        if (enrollStatus == -1) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "You're already enrolled!", Toast.LENGTH_LONG).show();
+                        }
+                        if (enrollStatus == -2) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Class already at full capacity", Toast.LENGTH_LONG).show();
+                        }
+
                     }
 
                 }
@@ -182,7 +233,7 @@ public class EnrollOrUnenrollClassesMember extends AppCompatActivity {
             @Override
             //getClassId, getClassTitle
             public void onClick(View view) {
-                try{
+                try {
                     String classID = getClassId.getText().toString();
                     String type = typeDropDown.getSelectedItem().toString();
                     String diff = difficultyDropDown.getSelectedItem().toString();
@@ -192,38 +243,53 @@ public class EnrollOrUnenrollClassesMember extends AppCompatActivity {
                     String classTitle = getClassTitle.getText().toString();
                     String dayOfWeek = dayOfWeekDropDown.getSelectedItem().toString();
 
-                    if (classTitle.isEmpty() && classDescription.isEmpty() && time.isEmpty()){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this,"Both title and description fields cannot be empty", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    else if(classID.isEmpty()){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this,"Must input a class ID to update", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    else if (!isInteger(cap) && cap.length() != 0){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this,"Please enter an integer for 'capacity'", Toast.LENGTH_LONG).show();
-                    }
-                    //if capacity is an integer but is smaller than 1
-                    else if (isInteger(cap) && Integer.parseInt(cap) < 1){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
-                    }
-                    else if(!time.isEmpty()&&(Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24)){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this, "Invalid Time", Toast.LENGTH_SHORT).show();
-                    }
+                    if (classID.isEmpty()) {
 
-                    SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
-                    String memberEmail = currentUserSession.getString("email", "");
-                    int enrollStatus = db3.unenrollMemberList(classID, memberEmail);
-                    if (enrollStatus == 1){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this,"Successfully unenrolled!", Toast.LENGTH_LONG).show();
-                    }
-                    if (enrollStatus == 0){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this,"Error: Cannot unenroll!", Toast.LENGTH_LONG).show();
-                    }
-                    if (enrollStatus == -1){
-                        Toast.makeText(EnrollOrUnenrollClassesMember.this,"You're not in this class to begin with!", Toast.LENGTH_LONG).show();
-                    }
+                        if (classTitle.isEmpty() && classDescription.isEmpty() && time.isEmpty()) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Both title and description fields cannot be empty", Toast.LENGTH_LONG).show();
+                            return;
+                        } else if (classID.isEmpty()) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Must input a class ID to update", Toast.LENGTH_LONG).show();
+                            return;
+                        } else if (!isInteger(cap) && cap.length() != 0) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Please enter an integer for 'capacity'", Toast.LENGTH_LONG).show();
+                        }
+                        //if capacity is an integer but is smaller than 1
+                        else if (isInteger(cap) && Integer.parseInt(cap) < 1) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
+                        } else if (!time.isEmpty() && (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24)) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Invalid Time", Toast.LENGTH_SHORT).show();
+                        }
 
+                        SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
+                        String memberEmail = currentUserSession.getString("email", "");
+                        int enrollStatus = db3.unenrollMemberList(classID, memberEmail);
+                        if (enrollStatus == 1) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Successfully unenrolled!", Toast.LENGTH_LONG).show();
+                        }
+                        if (enrollStatus == 0) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Error: Cannot unenroll!", Toast.LENGTH_LONG).show();
+                        }
+                        if (enrollStatus == -1) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "You're not in this class to begin with!", Toast.LENGTH_LONG).show();
+                        }
+
+                    }   else {
+
+                        SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
+                        String memberEmail = currentUserSession.getString("email", "");
+                        int enrollStatus = db3.unenrollMemberList(classID, memberEmail);
+                        if (enrollStatus == 1) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Successfully unenrolled!", Toast.LENGTH_LONG).show();
+                        }
+                        if (enrollStatus == 0) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Error: Cannot unenroll!", Toast.LENGTH_LONG).show();
+                        }
+                        if (enrollStatus == -1) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "You're not in this class to begin with!", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
                 }
                 catch(Exception e){
                     Toast.makeText(EnrollOrUnenrollClassesMember.this,"Exception occurred: " + e, Toast.LENGTH_LONG).show();
