@@ -1,10 +1,12 @@
 package com.example.tttt;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ public class SearchInstructorName extends AppCompatActivity {
     EditText txt, txt2;
     Button btn, btn2;
     String text, text2;
+    ImageButton back;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,17 @@ public class SearchInstructorName extends AppCompatActivity {
         txt = findViewById(R.id.txtInstructor);
         btn2 = findViewById(R.id.searchInst2);
         txt2 = findViewById(R.id.txtClass);
+        back = findViewById(R.id.BackToInstructor);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), InstructorActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
