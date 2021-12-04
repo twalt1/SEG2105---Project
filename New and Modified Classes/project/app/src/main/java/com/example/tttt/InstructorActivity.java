@@ -21,7 +21,7 @@ public class InstructorActivity extends AppCompatActivity {
 
         btn1 = findViewById(R.id.instructorEdit);
         btn2 = findViewById(R.id.instructorAdd);
-        btn = findViewById(R.id.instructorBack);
+        btn = findViewById(R.id.BackToInstructor);
         btn3 = findViewById((R.id.searchInstructor));
         btn4 = findViewById((R.id.viewMembers));
 
