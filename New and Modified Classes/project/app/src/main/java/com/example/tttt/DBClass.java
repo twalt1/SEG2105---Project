@@ -212,9 +212,11 @@ public class DBClass extends SQLiteOpenHelper {
         database.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
     }
 
-    public int enrollMemberList(String id, String emailOfMember){
+    public int enrollMemberList(String id, String emailOfMember, Boolean flag){
+
         SQLiteDatabase db = this.getWritableDatabase();
         int result = 0;
+
 
         String query = "SELECT * FROM " + TABLE_NAME
                 + " WHERE " + COL_ID
@@ -229,7 +231,7 @@ public class DBClass extends SQLiteOpenHelper {
 
             String[] arrayOfMembers = stringOfMembers.split(",");
             int numMembers = arrayOfMembers.length;
-            int classCap = cursor.getInt(10);
+            int classCap = cursor.getInt(5);
 
             //if this member already enrolled in this class
             if (stringOfMembers.contains(emailOfMember)) {
@@ -248,6 +250,11 @@ public class DBClass extends SQLiteOpenHelper {
             cursor.close();
             result = 1;
             //if class is already at full capacity
+
+        }
+        if (!flag) {
+
+            return 0;
 
         }
         ContentValues cv = new ContentValues();
@@ -388,7 +395,7 @@ public class DBClass extends SQLiteOpenHelper {
 
     /** To find a class in the database, return a empty class if not exist.
      *
-     * @param title The title of the class (!Have not tested yet!)
+     * @param title The title of the class
      * @return  a type Class
      */
 
@@ -399,6 +406,44 @@ public class DBClass extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_NAME
                 + " WHERE " + COL_1
                 + " = \"" + title + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+        Class aClass = new Class();
+
+        if (cursor.moveToFirst()) {
+
+            aClass.setID(cursor.getString(0));
+            aClass.setTitle(cursor.getString(1));
+            aClass.setType(cursor.getString(2));
+            aClass.setDescription(cursor.getString(3));
+            aClass.setDifficulty(cursor.getString(4));
+            aClass.setCapacity(Integer.parseInt(cursor.getString(5)));
+            aClass.setDate(cursor.getString(6));
+            aClass.setTime(cursor.getString(7));
+            aClass.setInstructor(cursor.getString(8));
+            aClass.setDayOfWeek(cursor.getString(9));
+            cursor.close();
+
+        }   else {
+
+            aClass = null;
+
+        }
+
+        db.close();
+
+        return aClass;
+
+    }
+
+    public Class findClass(Integer id) {
+
+        String res = String.valueOf(id);
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COL_ID
+                + " = \"" + res + "\"";
 
         Cursor cursor = db.rawQuery(query, null);
         Class aClass = new Class();
@@ -475,7 +520,7 @@ public class DBClass extends SQLiteOpenHelper {
 
     public ArrayList<Class> getEnrolled(String userEmail) {
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        //SQLiteDatabase db = this.getWritableDatabase();
         Cursor c1 = getAllData();
 
         ArrayList<Class> classes = new ArrayList<Class>();
@@ -543,6 +588,7 @@ public class DBClass extends SQLiteOpenHelper {
 
             }
             cursor.close();
+            db.close();
             result = 1;
             //if class is already at full capacity
 
@@ -551,5 +597,25 @@ public class DBClass extends SQLiteOpenHelper {
         return result;
 
     }
+
+    public Boolean checkConflict(String email, String date) {
+
+        ArrayList<Class> classes = getEnrolled(email);
+
+        for(int i = 0; i < classes.size(); i++) {
+
+            Class aClass = classes.get(i);
+            if (aClass.getDate().equals(date)) {
+
+                return false;
+
+            }
+
+        }
+
+        return true;
+
+    }
+
 
 }
