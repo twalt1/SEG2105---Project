@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,7 +13,7 @@ public class UserActivity extends AppCompatActivity {
 
 
     ImageButton backButton;
-    Button viewButton, enrollOrUnenrollButton;
+    Button enrollOrUnenrollButton;
     ImageButton btn;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +22,12 @@ public class UserActivity extends AppCompatActivity {
 
 
         backButton = findViewById(R.id.backbutton_id);
-        viewButton = findViewById(R.id.viewClasses_id);
+        //viewButton = findViewById(R.id.viewClasses_id);
         enrollOrUnenrollButton = findViewById(R.id.enroll_id);
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
 
-        viewButton.setOnClickListener(new View.OnClickListener() {
+        /*viewButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
 
@@ -33,13 +36,16 @@ public class UserActivity extends AppCompatActivity {
 
             }
 
-        });
+        });*/
 
         enrollOrUnenrollButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
 
                 Intent intent = new Intent(getApplicationContext(), EnrollOrUnenrollClassesMember.class);
+
+                //Toast.makeText(UserActivity.this, username, Toast.LENGTH_SHORT).show();
+                intent.putExtra("username1", username);
                 startActivity(intent);
 
             }
