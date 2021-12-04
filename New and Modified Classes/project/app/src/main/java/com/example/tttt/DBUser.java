@@ -132,4 +132,24 @@ public class DBUser extends SQLiteOpenHelper {
         return member;
     }
 
+    public String getUserEmail(String username) {
+
+        String res = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COL_2
+                + " = \"" + username + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+
+            res = cursor.getString(3);
+
+        }
+
+        return res;
+
+    }
+
 }
