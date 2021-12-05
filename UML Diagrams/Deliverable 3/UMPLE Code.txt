@@ -1,0 +1,161 @@
+class UserAccount
+{
+  age;
+email;
+phoneNo;
+username;
+password;
+public void createAccount(){
+
+}
+  
+}
+
+class Admin
+{
+    isA UserAccount;
+}
+
+class Class
+{
+    title;
+  type;
+  description;
+  difficulty;
+  date;
+  time;
+  Instructor;
+  dayOfWeek;
+  int capacity;
+  * -- 1 DBClass;
+  * -- * UserAccount;
+}
+
+class Instructor
+{
+    isA UserAccount;
+}
+
+class GymMember
+{
+    isA UserAccount;
+}class DBClass
+{
+  DATABASE_NAME;
+  TABLE_NAME;
+  COL_1_Title;
+  COL_2_Description;
+  COL_3_Difficulty;
+  COL_4_Capacity;
+  COL_5_Date;
+  COL_6_Time;
+  Class newClass;
+COL_Instructor;
+COL_DayOfWeek;
+int COL_ID;
+public boolean addClass(){
+
+}
+public boolean checkExist(){
+
+}
+public int getNum(){
+
+}
+public Class findClass(){
+
+}
+public boolean deleteClass(){
+
+}
+}
+
+class DBInstructor
+{
+  DATABASE_NAME;
+  TABLE_NAME;
+  COL_1_ID;
+  COL_2_username;
+  COL_3_Password;
+  COL_4_email;
+  COL_5_age;
+  COL_6_phonenumber;
+    * -- * SearchInstructorName;
+  * -- * ViewEnrolled;
+  * -- * EnrollOrUnenrollClassesMember;
+public void onCreate(){
+
+}
+public boolean checkusername(){
+
+}
+public boolean checkusernameandpassword(){
+
+}
+public int deleteData(){
+
+}
+public Cursor getAllData(){
+
+}
+public Instructor getInstructorFromUsernameAndPassword(){
+
+}
+}
+
+class DBUser
+{
+  DATABASE_NAME;
+  TABLE_NAME;
+  COL_1_ID;
+  COL_2_username;
+  COL_3_Password;
+  COL_4_email;
+  COL_5_age;
+  COL_6_phonenumber;
+   1 -- * UserAccount;
+public void onCreate(){
+
+}
+public boolean checkusername(){
+
+}
+public boolean checkusernameandpassword(){
+
+}
+public int deleteData(){
+
+}
+public Cursor getAllData(){
+
+}
+}
+
+class SearchInstructorName
+{
+  public void searchInstructor(){
+
+}
+}
+
+class ViewEnrolled
+{
+  public void onCreate(){
+
+}
+}
+
+class EnrollOrUnenrollClassesMember
+{
+    * -- * ViewEnrolled;
+public void viewEnrolled(){
+
+}
+  public void Enroll(){
+
+}
+  public void Unenroll(){
+
+}
+}
+
