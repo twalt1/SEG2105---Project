@@ -32,7 +32,7 @@ public class ViewEnrolled extends AppCompatActivity {
         setContentView(R.layout.activity_view_enrolled);
 
         btn = findViewById(R.id.findMembers);
-        txt = findViewById(R.id.editTextTextPersonName);
+        txt = findViewById(R.id.classIDtoenter);
         back = findViewById(R.id.viewEnrolledBack);
 
         btn.setOnClickListener(new View.OnClickListener() {
