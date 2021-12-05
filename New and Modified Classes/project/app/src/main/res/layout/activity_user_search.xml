@@ -4,16 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fece2f"
-    android:backgroundTint="#fece2f"
-    tools:context=".ViewEnrolled">
+    android:background="#fece2f">
 
     <ImageButton
-        android:id="@+id/viewEnrolledBack"
+        android:id="@+id/backtouser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/circle"
         android:contentDescription="@string/back"
         android:minWidth="48dp"
@@ -21,41 +19,54 @@
         android:padding="5dp"
         android:src="@drawable/back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/classIDtoenter"
-        android:layout_width="234dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:hint="Enter the ID of the class"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.616"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.192" />
+        tools:ignore="DuplicateIds" />
 
-    <TextView
-        android:id="@+id/classIDText"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/sbn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Class ID:"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/classIDtoenter"
+        android:layout_marginTop="380dp"
+        android:hint="Enter the Class Title"
+
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.197" />
+        tools:ignore="DuplicateIds" />
+
+    <Spinner
+        android:id="@+id/sbdow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/search2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/findMembers"
+        android:id="@+id/search1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Find Users Enrolled"
+        android:layout_marginTop="200dp"
+        android:text="SEARCH"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/search2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:text="SEARCH"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

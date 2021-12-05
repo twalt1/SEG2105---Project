@@ -7,9 +7,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -263,6 +265,7 @@ public class DBClass extends SQLiteOpenHelper {
         return result;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public int unenrollMemberList(String id, String emailOfMember){
         SQLiteDatabase db = this.getWritableDatabase();
         int result = 0;
@@ -273,7 +276,7 @@ public class DBClass extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, null);
 
-        String stringOfMembers = "";
+        String stringOfMembers = "There is no users";
         if(cursor.moveToFirst()) {
             stringOfMembers = cursor.getString(10);
 
@@ -286,57 +289,19 @@ public class DBClass extends SQLiteOpenHelper {
 
             //if contains member, remove him/her
             if (stringOfMembers.contains(emailOfMember)) {
-                //convert to list then remove
-                String[] arrayOfMembers = stringOfMembers.split(",");
-                List<String> listMembers = new ArrayList<String>();
-                listMembers = Arrays.asList(arrayOfMembers);
-                //new string
-                String s = "";
-                //traverse through list
-                for (int i = 0; i < listMembers.size(); i++){
-                    //get each index
-                    String v = listMembers.get(i);
-                    v = v.trim();
-                    //if the string has characters (and not white space only)
-                    if (v.length() > 0) {
-                        //if we see the email of the member, skip it
-                        if (v.equals(emailOfMember)) {
-                            continue;
-                        }
-                        s += v;
-                        //if index is not at the end, then make sure to add comma
-                        if (i < listMembers.size() - 1) {
-                            s += ", ";
-                        }
-                    }
-                }
-                //set to new string
-                stringOfMembers = s;
+                stringOfMembers = getStringAfterUnenroll(stringOfMembers, emailOfMember);
                 result = 1;
             }
-
-            /*
-            String[] arrayOfMembers = stringOfMembers.split(",");
-            List<String> listMembers = new ArrayList<String>();
-            listMembers = Arrays.asList(arrayOfMembers);
-            String cleanedStringOfMembers = "";
-            for (int i = 0; i < listMembers.size(); i++){
-                String v = listMembers.get(i);
-                //if the string has characters (and not white space only)
-                if (v.trim().length() > 0) {
-                    cleanedStringOfMembers += v;
-                    //if index is not at the end, then make sure to add comma
-                    if (i != listMembers.size() - 1) {
-                        cleanedStringOfMembers += ", ";
-                    }
-                }
-            }
-            stringOfMembers = cleanedStringOfMembers;
-            */
-
-
             cursor.close();
         }
+
+        String str = stringOfMembers.substring(stringOfMembers.length()-2);
+        if (str.equals(", ")) {
+
+            stringOfMembers = stringOfMembers.substring(0, stringOfMembers.length()-2);
+
+        }
+
         ContentValues cv = new ContentValues();
         cv.put(COL_MEMBERLIST, stringOfMembers);
         db.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
@@ -615,6 +580,61 @@ public class DBClass extends SQLiteOpenHelper {
 
         return true;
 
+    }
+
+    public Cursor searchByDOW(String dayofweek) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COL_DAYOFWEEK
+                + " =\"" + dayofweek + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        return cursor;
+
+    }
+
+    public Cursor searchByTitle(String title) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COL_1
+                + " =\"" + title + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        return cursor;
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String getStringAfterUnenroll(String s, String unenroll){
+        //convert to list
+        ArrayList<String> list = stringToList(s);
+        //get location index of what we want to remove
+        String toRemove = unenroll;
+        list = removeFromList(list, toRemove);
+        String listString = String.join(", ", list);
+        return listString;
+    }
+
+    public static ArrayList<String> stringToList(String s){
+        ArrayList<String> result = new ArrayList<String>();
+        //Split into array of strings
+        String str[] = s.split(",");
+        //Convert to a list
+        for (String element: str){
+            result.add(element.trim());
+        }
+        return result;
+    }
+
+    public static ArrayList<String> removeFromList(ArrayList<String> list, String toRemove){
+        //toRemove = '"' + toRemove + '"';
+        int location = list.indexOf(toRemove);
+        list.remove(location);
+        return list;
     }
 
 

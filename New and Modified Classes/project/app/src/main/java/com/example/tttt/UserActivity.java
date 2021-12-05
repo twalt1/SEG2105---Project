@@ -13,7 +13,7 @@ public class UserActivity extends AppCompatActivity {
 
 
     ImageButton backButton;
-    Button enrollOrUnenrollButton;
+    Button enrollOrUnenrollButton, searchClass;
     ImageButton btn;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,7 @@ public class UserActivity extends AppCompatActivity {
         backButton = findViewById(R.id.backbutton_id);
         //viewButton = findViewById(R.id.viewClasses_id);
         enrollOrUnenrollButton = findViewById(R.id.enroll_id);
+        searchClass = findViewById(R.id.searchforclass);
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
 
@@ -50,6 +51,16 @@ public class UserActivity extends AppCompatActivity {
 
             }
 
+        });
+
+        searchClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), UserSearchActivity.class);
+                startActivity(intent);
+
+            }
         });
 
         backButton.setOnClickListener(new View.OnClickListener() {

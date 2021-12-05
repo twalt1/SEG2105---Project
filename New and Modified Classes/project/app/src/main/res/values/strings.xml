@@ -26,6 +26,8 @@
     <string name="insID">Instructor ID:</string>
     <string name="create_class">Create a Class:</string>
     <string name="view_enroll">VIEW ENROLLED CLASSES</string>
+    <string name="sbn">searchbyname</string>
+    <string name="sbd">searchbydow</string>
 
     <string-array name="classType">
         <item>Yoga</item>
