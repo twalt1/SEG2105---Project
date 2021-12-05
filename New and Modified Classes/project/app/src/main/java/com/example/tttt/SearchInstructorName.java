@@ -23,7 +23,7 @@ public class SearchInstructorName extends AppCompatActivity {
         setContentView(R.layout.activity_instructor_search);
 
         btn = findViewById(R.id.searchInst);
-        txt = findViewById(R.id.txtInstructor);
+        txt = findViewById(R.id.txtEmail);
         btn2 = findViewById(R.id.searchInst2);
         txt2 = findViewById(R.id.txtClass);
         back = findViewById(R.id.BackToInstructor);
