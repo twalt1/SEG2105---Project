@@ -610,6 +610,9 @@ public class DBClass extends SQLiteOpenHelper {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static String getStringAfterUnenroll(String s, String unenroll){
+        if (s.isEmpty() || unenroll.isEmpty()){
+            return "";
+        }
         //convert to list
         ArrayList<String> list = stringToList(s);
         //get location index of what we want to remove
