@@ -76,7 +76,7 @@ public class UserSearchActivity extends AppCompatActivity {
 
                     buffer.append("ID :" + cursor.getString(0) + "\n");
                     buffer.append("Title :" + cursor.getString(1) + "\n");
-                    buffer.append(" Type:" + cursor.getString(2) + "\n");
+                    buffer.append("Type:" + cursor.getString(2) + "\n");
                     buffer.append("Description :" + cursor.getString(3) + "\n");
                     buffer.append("Difficulty :" + cursor.getString(4) + "\n");
                     buffer.append("Capacity :" + cursor.getString(5) + "\n");
@@ -119,7 +119,7 @@ public class UserSearchActivity extends AppCompatActivity {
 
                     buffer.append("ID :" + cursor.getString(0) + "\n");
                     buffer.append("Title :" + cursor.getString(1) + "\n");
-                    buffer.append(" Type:" + cursor.getString(2) + "\n");
+                    buffer.append("Type:" + cursor.getString(2) + "\n");
                     buffer.append("Description :" + cursor.getString(3) + "\n");
                     buffer.append("Difficulty :" + cursor.getString(4) + "\n");
                     buffer.append("Capacity :" + cursor.getString(5) + "\n");
