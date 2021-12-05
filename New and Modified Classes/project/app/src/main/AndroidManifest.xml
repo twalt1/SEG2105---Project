@@ -46,6 +46,7 @@
         <activity android:name=".CreateActivity" />
         <activity android:name=".AdminActivity" />
         <activity android:name=".InstructorActivity" />
+        <activity android:name=".UserSearchActivity"/>
     </application>
 
 </manifest>
