@@ -273,7 +273,7 @@ public class DBClass extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(query, null);
 
-        String stringOfMembers = "";
+        String stringOfMembers = "There is no users";
         if(cursor.moveToFirst()) {
             stringOfMembers = cursor.getString(10);
 
@@ -293,7 +293,7 @@ public class DBClass extends SQLiteOpenHelper {
                 //new string
                 String s = "";
                 //traverse through list
-                for (int i = 0; i < listMembers.size(); i++){
+                for (int i = 0; i < listMembers.size(); i++) {
                     //get each index
                     String v = listMembers.get(i);
                     v = v.trim();
@@ -309,7 +309,9 @@ public class DBClass extends SQLiteOpenHelper {
                             s += ", ";
                         }
                     }
+
                 }
+
                 //set to new string
                 stringOfMembers = s;
                 result = 1;
@@ -337,6 +339,14 @@ public class DBClass extends SQLiteOpenHelper {
 
             cursor.close();
         }
+
+        String str = stringOfMembers.substring(stringOfMembers.length()-2);
+        if (str.equals(", ")) {
+
+            stringOfMembers = stringOfMembers.substring(0, stringOfMembers.length()-2);
+
+        }
+
         ContentValues cv = new ContentValues();
         cv.put(COL_MEMBERLIST, stringOfMembers);
         db.update(TABLE_NAME, cv, "ID = ?", new String[] { id });
