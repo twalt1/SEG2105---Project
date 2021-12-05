@@ -625,13 +625,13 @@ public class DBClass extends SQLiteOpenHelper {
         String str[] = s.split(",");
         //Convert to a list
         for (String element: str){
-            result.add('"' + element.trim() + '"');
+            result.add(element.trim());
         }
         return result;
     }
 
     public static ArrayList<String> removeFromList(ArrayList<String> list, String toRemove){
-        toRemove = '"' + toRemove + '"';
+        //toRemove = '"' + toRemove + '"';
         int location = list.indexOf(toRemove);
         list.remove(location);
         return list;
