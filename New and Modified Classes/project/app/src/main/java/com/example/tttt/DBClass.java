@@ -617,12 +617,25 @@ public class DBClass extends SQLiteOpenHelper {
 
     }
 
-    public Cursor getInstructorClass(String instructor) {
+    public Cursor searchByDOW(String dayofweek) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME
-                + " WHERE " + COL_INSTRUCTOR
-                + " =\"" + instructor + "\"";
+                + " WHERE " + COL_DAYOFWEEK
+                + " =\"" + dayofweek + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        return cursor;
+
+    }
+
+    public Cursor searchByTitle(String title) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COL_1
+                + " =\"" + title + "\"";
 
         Cursor cursor = db.rawQuery(query, null);
 
