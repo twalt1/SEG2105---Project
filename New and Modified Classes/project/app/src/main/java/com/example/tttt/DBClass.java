@@ -617,5 +617,18 @@ public class DBClass extends SQLiteOpenHelper {
 
     }
 
+    public Cursor getInstructorClass(String instructor) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COL_INSTRUCTOR
+                + " =\"" + instructor + "\"";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        return cursor;
+
+    }
+
 
 }
