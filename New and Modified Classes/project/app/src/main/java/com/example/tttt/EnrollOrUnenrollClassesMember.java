@@ -36,36 +36,14 @@ public class EnrollOrUnenrollClassesMember extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enroll_or_unenroll_classes_member);
 
-        //drop down list to select type of class
-        typeDropDown = (Spinner) findViewById(R.id.type_id);
-        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.classType));
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        typeDropDown.setAdapter(typeAdapter);
 
-        //drop down list for difficulty
-        difficultyDropDown = (Spinner) findViewById(R.id.difficulty_id);
-        ArrayAdapter<String> difficultyAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.difficultyType));
-        typeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        difficultyDropDown.setAdapter(difficultyAdapter);
-
-        //drop down list for dayofweek
-        dayOfWeekDropDown = (Spinner) findViewById(R.id.dow_id);
-        ArrayAdapter<String> dayOfWeekAdapter = new ArrayAdapter<String>(getApplicationContext(),
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.dayOfWeek));
-        dayOfWeekAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dayOfWeekDropDown.setAdapter(dayOfWeekAdapter);
-
-        capacity = findViewById(R.id.cap_id);
         viewClasses = findViewById(R.id.view_id);
         back = findViewById(R.id.back_id);
         unenroll = findViewById(R.id.unenroll_id);
         enroll = findViewById(R.id.apply_id);
         getClassId = findViewById(R.id.class_id);
         getClassTitle = findViewById(R.id.title_id);
-        getClassDescription = findViewById(R.id.description_id);
-        getClassTime = findViewById(R.id.time_id);
+
         viewEnrolled = findViewById(R.id.ViewEnrolled);
         db2 = new DBUser(this);
         Intent intent = getIntent();
@@ -168,13 +146,7 @@ public class EnrollOrUnenrollClassesMember extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     String classID = getClassId.getText().toString();
-                    String type = typeDropDown.getSelectedItem().toString();
-                    String diff = difficultyDropDown.getSelectedItem().toString();
-                    String cap = capacity.getText().toString();
-                    String time = getClassTime.getText().toString();
-                    String classDescription = getClassDescription.getText().toString();
                     String classTitle = getClassTitle.getText().toString();
-                    String dayOfWeek = dayOfWeekDropDown.getSelectedItem().toString();
                     Boolean checkConflict;
                     Class aClass = null;
 
@@ -274,30 +246,12 @@ public class EnrollOrUnenrollClassesMember extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     String classID = getClassId.getText().toString();
-                    String type = typeDropDown.getSelectedItem().toString();
-                    String diff = difficultyDropDown.getSelectedItem().toString();
-                    String cap = capacity.getText().toString();
-                    String time = getClassTime.getText().toString();
-                    String classDescription = getClassDescription.getText().toString();
                     String classTitle = getClassTitle.getText().toString();
-                    String dayOfWeek = dayOfWeekDropDown.getSelectedItem().toString();
 
                     if (classID.isEmpty()) {
 
-                        if (classTitle.isEmpty() && classDescription.isEmpty() && time.isEmpty()) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Both title and description fields cannot be empty", Toast.LENGTH_LONG).show();
-                            return;
-                        } else if (classID.isEmpty()) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Must input a class ID to update", Toast.LENGTH_LONG).show();
-                            return;
-                        } else if (!isInteger(cap) && cap.length() != 0) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Please enter an integer for 'capacity'", Toast.LENGTH_LONG).show();
-                        }
-                        //if capacity is an integer but is smaller than 1
-                        else if (isInteger(cap) && Integer.parseInt(cap) < 1) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Class's capacity must be > 1", Toast.LENGTH_SHORT).show();
-                        } else if (!time.isEmpty() && (Integer.parseInt(time) < 0 || Integer.parseInt(time) > 24)) {
-                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Invalid Time", Toast.LENGTH_SHORT).show();
+                        if (classTitle.isEmpty()) {
+                            Toast.makeText(EnrollOrUnenrollClassesMember.this, "Please at least enter the title or the id of the class", Toast.LENGTH_LONG).show();
                         }
 
                         SharedPreferences currentUserSession = getApplicationContext().getSharedPreferences("currentUserSession", Context.MODE_PRIVATE);
