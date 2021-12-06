@@ -173,6 +173,12 @@ public class Class {
 
     }
 
+    public void setMemberList(String memberList) {
+
+        this.memberList = memberList;
+
+    }
+
     /** This method checks whether there is a conflict of a class
      *
      * @param aClass Type Class
